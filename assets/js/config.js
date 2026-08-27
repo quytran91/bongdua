@@ -150,7 +150,7 @@ window.BONGDUA_CONFIG = {
 
   /* ------------------------------------------------------------------ SEO */
   site: {
-    canonical: 'https://quytran91.github.io/bongdua/', // đổi khi có domain riêng
+    canonical: 'https://bongduafleur.netlify.app/', // đổi khi có domain riêng
 
     // Trang chuyển khoản là một TRANG RIÊNG (không phải popup) — khách dùng
     // điện thoại nhiều nên một trang thật đáng tin hơn: bấm Back được, tải lại
