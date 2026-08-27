@@ -319,7 +319,14 @@ button { font: inherit; color: inherit; }
   letter-spacing: -.02em;
   color: #fff;
   font-variant-numeric: tabular-nums;
-  text-shadow: 0 0 26px rgba(34, 211, 238, .35);
+  /* Quầng sáng quanh con số — đây là thứ mắt phải dừng lại đầu tiên trong
+     cả khối. Ba lớp loang dần, cộng một bóng tối mảnh để chữ vẫn tách khỏi
+     nền kính khi phía sau rơi vào vùng ảnh sáng. */
+  text-shadow:
+    0 0 14px rgba(255, 255, 255, .45),
+    0 0 34px rgba(34, 211, 238, .55),
+    0 0 64px rgba(65, 105, 225, .40),
+    0 2px 5px rgba(2, 12, 26, .6);
 }
 .offer__unit { font-size: 14px; color: var(--snow-soft); }
 
@@ -350,28 +357,102 @@ button { font: inherit; color: inherit; }
   100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
 }
 
+/* --- Hàng quyền lợi trong thẻ --- */
+.offer__perks {
+  display: flex; flex-wrap: wrap;
+  gap: 6px 14px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(160, 205, 235, .16);
+  list-style: none;
+}
+.offer__perks li {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12.5px; line-height: 1.35;
+  color: var(--snow);
+}
+.offer__tick {
+  flex: 0 0 auto;
+  position: relative;
+  width: 15px; height: 15px; border-radius: 50%;
+  background: linear-gradient(135deg, #7BEBFB 0%, var(--aqua) 100%);
+}
+.offer__tick::before {
+  content: '';
+  position: absolute; left: 50%; top: 46%;
+  width: 3.5px; height: 7px;
+  border: solid #04161F;
+  border-width: 0 1.7px 1.7px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Đếm ngược dạng viên pill, dùng ở bản gọn — nằm cạnh giá cho đỡ tốn dòng */
+.offer__deadline--pill {
+  padding: 5px 12px 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 211, 238, .42);
+  background: rgba(34, 211, 238, .12);
+  align-self: center;
+}
+
 /* --- Bản gọn dùng ở banner ---
    Ở đây chiều cao là tài nguyên quý: mỗi pixel thêm vào là nút "Giữ chỗ" tiến
    gần hơn tới mép dưới màn hình. Nên bản này gộp tất cả thành một khối phẳng,
    bỏ đường kẻ ngang, cho hạn chót nằm cùng hàng với giá. */
+/* Bản gọn ở banner là chỗ DUY NHẤT trên trang mà kính mờ có ý nghĩa thật:
+   phía sau nó là ảnh banner. Nền để trong mờ thay vì đặc, thêm blur +
+   saturate -> màu hoa và ánh đèn phía sau ngấm qua thẻ, thẻ hoà vào ảnh chứ
+   không phải một khối navy dán đè lên. Ở các thẻ khác (đặt trên nền phẳng)
+   vẫn giữ nền đặc, vì kính đặt trên mảng màu phẳng chỉ ra một hộp đục. */
 .offer--slim {
   display: flex; flex-wrap: wrap; align-items: baseline;
-  gap: 4px 12px;
-  padding: 10px 14px 11px;
-  border-radius: 14px;
-  margin-bottom: 14px;
+  gap: 6px 12px;
+  padding: 12px 15px 13px;
+  border-radius: 18px;
+  margin-bottom: 12px;
+  background:
+    radial-gradient(130% 120% at 0% 0%, rgba(0, 71, 171, .40) 0%, rgba(6, 27, 49, 0) 66%),
+    linear-gradient(158deg, rgba(10, 44, 82, .55) 0%, rgba(4, 18, 34, .68) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+          backdrop-filter: blur(22px) saturate(1.5);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, .22),
+    0 2px 4px rgba(2, 12, 26, .35),
+    0 20px 46px -24px rgba(0, 0, 0, .9);
 }
-.offer--slim .offer__top { width: 100%; margin-bottom: 2px; gap: 6px 8px; }
-.offer--slim .offer__pct { padding: 2px 9px; font-size: 11.5px; }
+/* Không có backdrop-filter -> tăng độ đục để chữ vẫn đọc được trên ảnh */
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .offer--slim {
+    background:
+      radial-gradient(130% 120% at 0% 0%, rgba(0, 71, 171, .5) 0%, rgba(6, 27, 49, 0) 66%),
+      linear-gradient(158deg, rgba(8, 36, 68, .92) 0%, rgba(3, 15, 29, .95) 100%);
+  }
+}
+.offer--slim .offer__top { width: 100%; margin-bottom: 4px; gap: 6px 8px; }
+.offer--slim .offer__pct { padding: 3px 10px; font-size: 12.5px; }
 .offer--slim .offer__label { font-size: 10.5px; letter-spacing: .08em; }
-.offer--slim .offer__prices { margin-bottom: 0; gap: 0 8px; }
-.offer--slim .offer__old { font-size: 13.5px; }
-.offer--slim .offer__new { font-size: clamp(25px, 6.6vw, 30px); }
+.offer--slim .offer__prices {
+  width: 100%; margin-bottom: 0; gap: 4px 10px; align-items: center;
+}
+.offer--slim .offer__old { font-size: 14.5px; }
+.offer--slim .offer__new { font-size: clamp(31px, 8.4vw, 38px); }
 .offer--slim .offer__unit { display: none; }
 .offer--slim .offer__deadline {
-  margin: 0; padding: 0; border: 0;
+  margin: 0; border: 0;
   font-size: 12px; gap: 7px;
 }
+.offer--slim .offer__deadline--pill {
+  border: 1px solid rgba(34, 211, 238, .42);
+  padding: 5px 12px 5px 10px;
+}
+.offer--slim .offer__perks {
+  width: 100%;
+  margin-top: 8px; padding-top: 8px;
+  gap: 4px 10px;
+}
+.offer--slim .offer__perks li { font-size: 11px; gap: 5px; }
+.offer--slim .offer__tick { width: 13px; height: 13px; }
+.offer--slim .offer__tick::before { width: 3px; height: 6px; border-width: 0 1.5px 1.5px 0; }
 
 /* --- Trong phần "Bạn nhận được gì": thẻ tối nổi bật trên nền pearl --- */
 .value__offer {
@@ -446,7 +527,9 @@ button { font: inherit; color: inherit; }
 .hero__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  /* 2/1 đúng bằng tỉ lệ ảnh gốc -> KHÔNG cắt mất gì, mà lại thấp hơn 16/9
+     24px, đủ để nút Giữ chỗ còn nằm trong màn hình đầu. */
+  aspect-ratio: 2 / 1;
   overflow: hidden;
 }
 .hero__media img {
@@ -466,7 +549,7 @@ button { font: inherit; color: inherit; }
   position: static; z-index: 1;
   width: 100%; max-width: var(--maxw);
   margin-inline: auto;
-  padding: 18px var(--gut) 26px;
+  padding: 14px var(--gut) 20px;
   display: flex; flex-direction: column; justify-content: center;
 }
 
@@ -483,7 +566,7 @@ button { font: inherit; color: inherit; }
   font-size: clamp(38px, 11.5vw, 104px);
   line-height: 1.0;
   letter-spacing: -0.015em;
-  margin: 0 0 18px;
+  margin: 0 0 13px;
 }
 /* Chữ TRẮNG + quầng sáng, không dùng gradient nữa.
    Bản trước tô gradient aqua->royal, nhưng đặt trên ảnh nền tối thì chính chữ
@@ -521,7 +604,7 @@ button { font: inherit; color: inherit; }
   font-size: clamp(14.5px, 3.9vw, 19px);
   color: var(--snow-soft);
   max-width: 46ch;
-  margin: 0 0 12px;
+  margin: 0 0 10px;
 }
 
 /* Mobile: 4 thông tin gộp thành một dòng ngăn bằng dấu chấm giữa -> tiết kiệm
@@ -530,8 +613,8 @@ button { font: inherit; color: inherit; }
 .hero__facts {
   display: flex; flex-wrap: wrap; align-items: baseline;
   gap: 4px 0;
-  margin: 0 0 14px;
-  padding: 10px 0 0;
+  margin: 0 0 12px;
+  padding: 9px 0 0;
   border-top: 1px solid var(--line-dark);
   max-width: 520px;
 }
@@ -547,6 +630,15 @@ button { font: inherit; color: inherit; }
 .hero__facts .is-price { font-weight: 600; color: var(--aqua); }
 
 /* Hai nút nằm cùng một hàng trên điện thoại: nút chính co giãn, nút phụ vừa chữ. */
+/* Máy hẹp (360px và nhỏ hơn) là khổ chật nhất. Cắt băng ảnh thấp hơn ~9% và
+   hạ nhẹ cỡ tiêu đề — đủ để nút Giữ chỗ vẫn nằm trong màn hình đầu. Chủ thể
+   của banner nằm giữa khung theo chiều dọc nên cắt bớt trên dưới không mất gì. */
+@media (max-width: 380px) {
+  .hero__media { aspect-ratio: 2.25 / 1; }
+  .hero__title { font-size: clamp(36px, 10.8vw, 104px); }
+  .hero__title em { font-size: clamp(44px, 12.4vw, 104px); }
+}
+
 /* Nhãn dài chỉ hiện từ tablet trở lên, để hai nút vừa một hàng trên điện thoại. */
 .wide-only { display: none; }
 @media (min-width: 720px) { .wide-only { display: inline; } }

@@ -97,6 +97,7 @@
       saveLabel: V.formatVND(oldV - newV),
       percentLabel: '−' + pct + '%',
       note: E.promoNote || '',
+      perks: Array.isArray(E.promoPerks) ? E.promoPerks : [],
       daysLeft: daysLeft,
       countdown: countdown,
       afterNote: deadlineShort
@@ -243,7 +244,29 @@
         dl.appendChild(dot);
         dl.appendChild(document.createTextNode(
           PROMO.countdown + (slim ? '' : ' để giữ mức giá này')));
-        host.appendChild(dl);
+        // Bản slim: đếm ngược nằm ngay cạnh giá thành một viên pill, không
+        // xuống dòng riêng -> tiết kiệm chiều cao mà lại đập vào mắt hơn.
+        if (slim) { dl.classList.add('offer__deadline--pill'); prices.appendChild(dl); }
+        else host.appendChild(dl);
+      }
+
+      // Hàng quyền lợi: nói ngay "488.000đ này gồm những gì" đúng lúc khách
+      // vừa nhìn thấy con số.
+      if (PROMO.perks.length) {
+        var ul = document.createElement('ul');
+        ul.className = 'offer__perks';
+        PROMO.perks.forEach(function (t) {
+          var li = document.createElement('li');
+          // Dấu tích vẽ bằng CSS chứ không dùng ký tự ✓ — không phải font nào
+          // cũng có glyph đó, thiếu là ra ô vuông ngay giữa thẻ ưu đãi.
+          var ic = document.createElement('span');
+          ic.className = 'offer__tick';
+          ic.setAttribute('aria-hidden', 'true');
+          li.appendChild(ic);
+          li.appendChild(document.createTextNode(t));
+          ul.appendChild(li);
+        });
+        host.appendChild(ul);
       }
     });
   }

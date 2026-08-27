@@ -58,6 +58,10 @@ window.BONGDUA_CONFIG = {
     promoDeadlineISO: '2026-09-10',                 // [XÁC NHẬN]
     promoNote: 'Ưu đãi book trước 10.09',           // [XÁC NHẬN]
 
+    // Ba quyền lợi ngắn gọn hiện ngay trong thẻ ưu đãi ở banner.
+    // Cố ý viết thật ngắn để lọt một hàng trên điện thoại.
+    promoPerks: ['Đồ uống miễn phí', 'Sản phẩm mang về', 'Ảnh chuyên nghiệp'],
+
     isLastOfYear: true,                             // [XÁC NHẬN] workshop cuối 2026
 
     // Số chỗ: brief cấm tự bịa. Để null -> trang chỉ nói "nhóm nhỏ", không nêu con số.
