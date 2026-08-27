@@ -130,7 +130,7 @@
 
     'founder.line': E.founderName
       ? E.founderName + ' — ' + (E.founderRole || '')
-      : (E.founderRole || 'Người sáng lập Bông Dua Fleur'),
+      : (E.founderRole || 'Chủ shop Bông Dua Fleur'),
 
     'checkin.photoNote': POLICY.photoDelivery ||
       'Thời gian gửi ảnh sẽ được Bông Dua báo cụ thể khi xác nhận chỗ.',

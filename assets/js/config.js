@@ -68,7 +68,7 @@ window.BONGDUA_CONFIG = {
     dresscode: ['Trắng', 'Hồng', 'Hồng nude', 'Be'], // [TỪ POSTER]
 
     founderName: 'Thư Phạm',                        // [XÁC NHẬN] người hướng dẫn cắm hoa
-    founderRole: 'Người sáng lập Bông Dua Fleur',   // [XÁC NHẬN]
+    founderRole: 'Chủ shop Bông Dua Fleur',         // [XÁC NHẬN]
   },
 
   /* --------------------------------------------------- QUYỀN LỢI ĐÃ BAO GỒM */

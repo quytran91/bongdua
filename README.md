@@ -350,10 +350,8 @@ phóng to từ một mẩu ảnh ngang.
 | `779160485_…jpg` | Gallery — ảnh cả nhóm | |
 | `780981722_…jpg` | Gallery — chân dung cùng lan/cẩm tú cầu | |
 | `779201235_…jpg` | Gallery — khoảnh khắc cười tự nhiên | |
-| `778568574_…jpg` | Gallery — cận cảnh hoa sen | |
-| `779050263_…jpg` | Gallery — nhóm ngồi trò chuyện | |
 | `780748678_…jpg` | Gallery — nàng cầm sen | |
-| 21 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
+| 23 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
 
 Trong `MAP`, phần tử thứ 3 là **tỉ lệ khung cắt sẵn**, phần tử thứ 4 là **khung
 cắt tương đối** `(trái, trên, phải, dưới)` — dùng cho ảnh QR. Cắt trước rồi mới
