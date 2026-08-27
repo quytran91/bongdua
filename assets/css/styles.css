@@ -357,6 +357,28 @@ button { font: inherit; color: inherit; }
   100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
 }
 
+/* --- Khu vực hành động nằm NGAY TRONG thẻ ---
+   Gộp giá, quyền lợi, nút bấm và dòng trấn an vào một khối duy nhất: mắt
+   không phải nhảy qua lại giữa "giá ở đây, nút ở kia". Đường kẻ mảnh ngăn
+   phần thông tin với phần hành động. */
+.offer__act {
+  width: 100%;
+  margin-top: 11px;
+  padding-top: 11px;
+  border-top: 1px solid rgba(160, 205, 235, .18);
+}
+.offer__act .hero__cta { margin-bottom: 9px; }
+.offer__act .hero__reassure { margin: 0; font-size: 11.5px; }
+
+/* Dòng ngày / giờ / địa điểm trong thẻ */
+.offer__when {
+  width: 100%;
+  margin: 0 0 10px;
+  font-size: 12.5px; line-height: 1.45;
+  color: var(--snow-soft);
+}
+.offer__when span { color: var(--aqua); margin: 0 7px; }
+
 /* --- Hàng quyền lợi trong thẻ --- */
 .offer__perks {
   display: flex; flex-wrap: wrap;
@@ -407,9 +429,9 @@ button { font: inherit; color: inherit; }
 .offer--slim {
   display: flex; flex-wrap: wrap; align-items: baseline;
   gap: 6px 12px;
-  padding: 12px 15px 13px;
-  border-radius: 18px;
-  margin-bottom: 12px;
+  padding: 13px 15px 15px;
+  border-radius: 20px;
+  margin-bottom: 14px;
   background:
     radial-gradient(130% 120% at 0% 0%, rgba(0, 71, 171, .40) 0%, rgba(6, 27, 49, 0) 66%),
     linear-gradient(158deg, rgba(10, 44, 82, .55) 0%, rgba(4, 18, 34, .68) 100%);
@@ -435,7 +457,7 @@ button { font: inherit; color: inherit; }
   width: 100%; margin-bottom: 0; gap: 4px 10px; align-items: center;
 }
 .offer--slim .offer__old { font-size: 14.5px; }
-.offer--slim .offer__new { font-size: clamp(31px, 8.4vw, 38px); }
+.offer--slim .offer__new { font-size: clamp(33px, 8.8vw, 42px); }
 .offer--slim .offer__unit { display: none; }
 .offer--slim .offer__deadline {
   margin: 0; border: 0;
@@ -447,7 +469,7 @@ button { font: inherit; color: inherit; }
 }
 .offer--slim .offer__perks {
   width: 100%;
-  margin-top: 8px; padding-top: 8px;
+  margin-top: 9px; padding-top: 9px;
   gap: 4px 10px;
 }
 .offer--slim .offer__perks li { font-size: 11px; gap: 5px; }
@@ -529,7 +551,9 @@ button { font: inherit; color: inherit; }
   width: 100%;
   /* 2/1 đúng bằng tỉ lệ ảnh gốc -> KHÔNG cắt mất gì, mà lại thấp hơn 16/9
      24px, đủ để nút Giữ chỗ còn nằm trong màn hình đầu. */
-  aspect-ratio: 2 / 1;
+  /* 2.1/1 - cắt rất nhẹ so với tỉ lệ gốc 2/1, đổi lấy chỗ cho thẻ ưu đãi
+     nay đã chứa cả nút bấm. Chủ thể nằm giữa khung nên không mất gì. */
+  aspect-ratio: 2.1 / 1;
   overflow: hidden;
 }
 .hero__media img {
@@ -549,15 +573,15 @@ button { font: inherit; color: inherit; }
   position: static; z-index: 1;
   width: 100%; max-width: var(--maxw);
   margin-inline: auto;
-  padding: 14px var(--gut) 20px;
+  padding: 12px var(--gut) 18px;
   display: flex; flex-direction: column; justify-content: center;
 }
 
 /* Logo đặt đè lên băng ảnh để không tốn thêm chiều cao của màn hình đầu. */
 .hero__logo {
   position: absolute; z-index: 2;
-  top: 14px; left: var(--gut);
-  width: 62px; height: auto; margin: 0;
+  top: 12px; left: var(--gut);
+  width: 56px; height: auto; margin: 0;
   filter: drop-shadow(0 4px 18px rgba(3, 18, 35, .9));
 }
 
@@ -607,38 +631,6 @@ button { font: inherit; color: inherit; }
   margin: 0 0 10px;
 }
 
-/* Mobile: 4 thông tin gộp thành một dòng ngăn bằng dấu chấm giữa -> tiết kiệm
-   ~66px chiều cao, đủ để CTA vẫn nằm trong màn hình đầu. Nhãn dt được ẩn khỏi
-   mắt nhưng trình đọc màn hình vẫn đọc được. */
-.hero__facts {
-  display: flex; flex-wrap: wrap; align-items: baseline;
-  gap: 4px 0;
-  margin: 0 0 12px;
-  padding: 9px 0 0;
-  border-top: 1px solid var(--line-dark);
-  max-width: 520px;
-}
-.hero__facts > div { display: flex; align-items: baseline; }
-.hero__facts > div + div::before {
-  content: '·'; color: var(--aqua); margin: 0 8px; flex: 0 0 auto;
-}
-.hero__facts dt {
-  position: absolute; width: 1px; height: 1px;
-  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
-}
-.hero__facts dd { font-size: 13.5px; line-height: 1.4; color: var(--snow); }
-.hero__facts .is-price { font-weight: 600; color: var(--aqua); }
-
-/* Hai nút nằm cùng một hàng trên điện thoại: nút chính co giãn, nút phụ vừa chữ. */
-/* Máy hẹp (360px và nhỏ hơn) là khổ chật nhất. Cắt băng ảnh thấp hơn ~9% và
-   hạ nhẹ cỡ tiêu đề — đủ để nút Giữ chỗ vẫn nằm trong màn hình đầu. Chủ thể
-   của banner nằm giữa khung theo chiều dọc nên cắt bớt trên dưới không mất gì. */
-@media (max-width: 380px) {
-  .hero__media { aspect-ratio: 2.25 / 1; }
-  .hero__title { font-size: clamp(36px, 10.8vw, 104px); }
-  .hero__title em { font-size: clamp(44px, 12.4vw, 104px); }
-}
-
 /* Nhãn dài chỉ hiện từ tablet trở lên, để hai nút vừa một hàng trên điện thoại. */
 .wide-only { display: none; }
 @media (min-width: 720px) { .wide-only { display: inline; } }
@@ -680,23 +672,9 @@ button { font: inherit; color: inherit; }
     max-width: min(var(--maxw), 100%);
   }
   .hero__logo { position: static; width: 96px; margin: 0 0 22px; }
-  /* Desktop: trả lại dạng bảng 4 cột có nhãn. */
-  .hero__facts {
-    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 12px 16px; padding-top: 16px; margin-bottom: 26px;
-  }
-  .hero__facts > div { display: block; }
-  .hero__facts > div + div::before { content: none; }
-  .hero__facts dt {
-    position: static; width: auto; height: auto; clip-path: none;
-    font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
-    color: var(--aqua); margin-bottom: 3px;
-  }
-  .hero__facts dd { font-size: 14.5px; }
-  .hero__facts .is-price { color: var(--snow); }
   .hero__cta { gap: 12px; }
   .hero__cta .btn--primary, .hero__cta .btn--ghost { flex: 0 0 auto; padding-inline: 28px; }
-  .hero__sub, .hero__facts { max-width: 44ch; }
+  .hero__sub { max-width: 44ch; }
   /* Chữ nằm đè lên ảnh -> dùng bóng chữ thay vì dìm cả tấm ảnh cho tối. */
   .hero__inner :where(h1, p, dt, dd) {
     text-shadow: 0 1px 2px rgba(3, 18, 35, .6), 0 2px 22px rgba(3, 18, 35, .8);
@@ -940,60 +918,78 @@ button { font: inherit; color: inherit; }
   font-size: 13px; letter-spacing: .1em; text-transform: uppercase;
   color: var(--aqua-deep); margin-bottom: 1.2em;
 }
-/* Thẻ kính kiểu iOS, nhưng chỉnh về đúng tông xanh của trang:
-   - nền trắng trong mờ pha một chút xanh royal, không phải trắng thuần
-   - backdrop-filter blur + saturate: saturate mới là thứ làm màu phía sau
-     "ngấm" qua kính, thiếu nó thì chỉ là một hộp mờ đục
-   - viền trong sáng ở mép trên + viền hairline quanh thân, giống cách iOS
-     bắt sáng ở cạnh trên của vật liệu
-   - bóng đổ mềm và rộng để thẻ nổi khỏi mặt nền */
+/* Thẻ kính kiểu iOS, dùng ĐÚNG tông navy của thẻ ưu đãi để cả trang là một
+   hệ vật liệu, không phải hai thứ rời rạc.
+   Bản trước để nền trắng trong mờ — đặt trên section nền pearl thì gần như
+   tàng hình, chẳng ra thẻ mà cũng chẳng ra kính. Nền tối trên nền sáng mới
+   là tương phản, và mới thấy được lớp kính. */
 .founder__quote {
   position: relative;
   margin: 0 0 1.6em;
   padding: 24px 26px 26px;
   border-radius: 26px;
+  color: var(--snow);
   background:
-    linear-gradient(155deg, rgba(255, 255, 255, .78) 0%, rgba(240, 246, 255, .58) 100%);
-  -webkit-backdrop-filter: blur(20px) saturate(1.6);
-          backdrop-filter: blur(20px) saturate(1.6);
+    radial-gradient(130% 120% at 0% 0%, rgba(0, 71, 171, .45) 0%, rgba(6, 27, 49, 0) 66%),
+    linear-gradient(158deg, rgba(10, 44, 82, .90) 0%, rgba(4, 18, 34, .94) 100%);
+  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+          backdrop-filter: blur(22px) saturate(1.5);
   box-shadow:
-    inset 0 1.5px 0 rgba(255, 255, 255, .95),
-    inset 0 0 0 1px rgba(65, 105, 225, .13),
-    0 1px 2px rgba(11, 33, 53, .06),
-    0 22px 44px -26px rgba(11, 33, 53, .40),
-    0 40px 70px -50px rgba(0, 71, 171, .5);
+    inset 0 1.5px 0 rgba(255, 255, 255, .22),
+    0 2px 4px rgba(2, 12, 26, .26),
+    0 24px 50px -26px rgba(0, 71, 171, .55),
+    0 44px 76px -54px rgba(2, 12, 26, .7);
+}
+/* Viền gradient mảnh, y hệt thẻ ưu đãi */
+.founder__quote::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(150deg, rgba(34, 211, 238, .7), rgba(65, 105, 225, .32) 45%, rgba(255, 255, 255, .08));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  pointer-events: none;
 }
 .founder__quote p {
   position: relative;
   font-family: var(--f-display); font-style: italic;
-  font-size: clamp(19px, 4.6vw, 25px); line-height: 1.44;
-  color: var(--ink); margin: 0;
+  font-size: clamp(19px, 4.6vw, 25px); line-height: 1.46;
+  color: #fff; margin: 0;
+  /* Glow nhẹ hơn hẳn con số giá — đây là đoạn văn dài, sáng quá là nhức mắt. */
+  text-shadow:
+    0 0 18px rgba(34, 211, 238, .28),
+    0 0 46px rgba(65, 105, 225, .20),
+    0 2px 4px rgba(2, 12, 26, .5);
 }
 /* Dấu ngoặc kép chìm phía sau chữ, chỉ đủ thấy để biết đây là lời kể */
 .founder__mark {
   position: absolute;
-  top: -2px; right: 18px;
+  top: 2px; right: 20px;
   font-family: var(--f-display);
   font-size: 92px; line-height: 1;
-  color: var(--royal);
-  opacity: .13;
+  color: var(--aqua);
+  opacity: .26;
   pointer-events: none;
   user-select: none;
 }
 
-/* Máy không hỗ trợ backdrop-filter (Firefox cũ, một số webview) thì lớp mờ
-   không chạy -> tăng độ đục để thẻ vẫn ra hình khối, không thành ô trong suốt. */
+/* Máy không hỗ trợ backdrop-filter thì tăng độ đục để thẻ vẫn ra khối đặc. */
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .founder__quote {
-    background: linear-gradient(155deg, rgba(255, 255, 255, .96) 0%, rgba(238, 245, 255, .92) 100%);
+    background:
+      radial-gradient(130% 120% at 0% 0%, rgba(0, 71, 171, .5) 0%, rgba(6, 27, 49, 0) 66%),
+      linear-gradient(158deg, rgba(9, 40, 75, 1) 0%, rgba(3, 16, 30, 1) 100%);
   }
 }
 
 @media (min-width: 620px) {
   .founder__quote { padding: 28px 32px 30px; border-radius: 28px; }
-  .founder__mark { font-size: 112px; right: 24px; }
+  .founder__mark { font-size: 112px; right: 26px; }
 }
-.founder__text > p:not(.eyebrow):not(.founder__name) { color: var(--ink-soft); font-size: 15.5px; max-width: 46ch; }
+
 @media (min-width: 900px) {
   .founder__grid { grid-template-columns: .8fr 1fr; gap: 56px; align-items: center; }
   .founder__fig { max-width: none; }

@@ -69,22 +69,22 @@
 
     <h1 class="hero__title">Gói một mùa trăng<br><em>bằng hoa.</em></h1>
 
-    <p class="hero__sub">Nửa ngày cùng Bông Dua Fleur: tự tay làm một chiếc đèn lồng hoa tươi, học cắm hoa từ đầu và mang về một bộ ảnh thật đẹp.</p>
+    <p class="hero__sub">Nửa ngày tự tay làm một chiếc đèn lồng hoa tươi, học cắm hoa từ đầu và mang về bộ ảnh thật đẹp.</p>
 
-    <dl class="hero__facts">
-      <div><dt>Ngày</dt><dd data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</dd></div>
-      <div><dt>Thời gian</dt><dd data-cfg="hero.time">Nửa ngày</dd></div>
-      <div><dt>Địa điểm</dt><dd data-cfg="hero.place">Café tại Hà Nội</dd></div>
-    </dl>
-
-    <div data-offer="slim"></div>
-
-    <div class="hero__cta">
-      <a class="btn btn--primary btn--glow" href="#dang-ky" data-track="hero_cta_click">Giữ chỗ<span class="wide-only"> với</span> <span data-cfg="event.priceLabel">488.000đ</span></a>
-      <a class="btn btn--ghost" href="#trai-nghiem"><span class="wide-only">Xem </span>Trải nghiệm</a>
+    <!-- Cả giá, quyền lợi, hai nút và dòng trấn an nằm chung MỘT thẻ.
+         Phần [data-offer-keep] là phần viết tay, core.js chỉ chèn phần giá
+         phía trên nó chứ không xoá — và khi hết ưu đãi thì thẻ được gỡ bỏ
+         nhưng nội dung bên trong này được giữ lại, nếu không thì ngày hết
+         hạn trang sẽ mất luôn nút Giữ chỗ. -->
+    <div data-offer="slim">
+      <div class="offer__act" data-offer-keep>
+        <div class="hero__cta">
+          <a class="btn btn--primary btn--glow" href="#dang-ky" data-track="hero_cta_click">Giữ chỗ<span class="wide-only"> với</span> <span data-cfg="event.priceLabel">488.000đ</span></a>
+          <a class="btn btn--ghost" href="#trai-nghiem"><span class="wide-only">Xem </span>Trải nghiệm</a>
+        </div>
+        <p class="hero__reassure">Không cần kinh nghiệm <span aria-hidden="true">·</span> Hướng dẫn từng bước <span aria-hidden="true">·</span> Nhóm nhỏ</p>
+      </div>
     </div>
-
-    <p class="hero__reassure">Không cần kinh nghiệm <span aria-hidden="true">·</span> Hướng dẫn từng bước <span aria-hidden="true">·</span> Nhóm nhỏ</p>
   </div>
 
   <!-- Chip thành quả: để khách hiểu ngay buổi này làm ra cái gì. Chỉ hiện từ

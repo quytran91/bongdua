@@ -163,9 +163,16 @@
       el.textContent = val;
     });
 
-    // Hết ưu đãi (hoặc không cấu hình) -> gỡ sạch mọi dấu vết ưu đãi
+    // Hết ưu đãi (hoặc không cấu hình) -> gỡ sạch mọi dấu vết ưu đãi.
+    // Nhưng phần [data-offer-keep] bên trong (nút bấm, dòng trấn an) phải được
+    // nhấc ra ngoài trước khi gỡ thẻ, không thì mất luôn nút Giữ chỗ.
     if (!PROMO.active) {
-      $$('[data-cfg-row="promo"], [data-offer]').forEach(function (el) { el.remove(); });
+      $$('[data-cfg-row="promo"]').forEach(function (el) { el.remove(); });
+      $$('[data-offer]').forEach(function (host) {
+        var keep = host.querySelector('[data-offer-keep]');
+        if (keep && host.parentNode) host.parentNode.insertBefore(keep, host);
+        host.remove();
+      });
     } else {
       renderOffers();
     }
@@ -195,7 +202,15 @@
       var slim = host.getAttribute('data-offer') === 'slim';
       host.classList.add('offer');
       if (slim) host.classList.add('offer--slim');
-      host.innerHTML = '';
+
+      // Chỉ dọn phần lần trước JS dựng ra, giữ nguyên phần viết tay trong HTML.
+      $$('[data-offer-part]', host).forEach(function (el) { el.remove(); });
+      var keep = host.querySelector('[data-offer-keep]');
+      var frag = document.createDocumentFragment();
+      var put = function (el) {
+        el.setAttribute('data-offer-part', '');
+        frag.appendChild(el);
+      };
 
       var top = document.createElement('div');
       top.className = 'offer__top';
@@ -211,7 +226,29 @@
         lb.textContent = PROMO.note;
         top.appendChild(lb);
       }
-      host.appendChild(top);
+      put(top);
+
+      // Bản slim: ngày / giờ / địa điểm nằm luôn trong thẻ, ngay dưới nhãn ưu
+      // đãi. Trước đây là một bảng <dl> riêng bên ngoài, chiếm ~55px chiều cao
+      // — quá đắt trên màn hình đầu khi thẻ đã ôm cả nút bấm.
+      if (slim) {
+        var when = [DERIVED['event.dateLabel'], DERIVED['hero.time'], DERIVED['hero.place']]
+          .filter(Boolean);
+        if (when.length) {
+          var w = document.createElement('p');
+          w.className = 'offer__when';
+          when.forEach(function (t, i) {
+            if (i) {
+              var sep = document.createElement('span');
+              sep.setAttribute('aria-hidden', 'true');
+              sep.textContent = '·';
+              w.appendChild(sep);
+            }
+            w.appendChild(document.createTextNode(t));
+          });
+          put(w);
+        }
+      }
 
       var prices = document.createElement('p');
       prices.className = 'offer__prices';
@@ -225,14 +262,14 @@
       u.className = 'offer__unit';
       u.textContent = '/ người';
       prices.appendChild(o); prices.appendChild(n); prices.appendChild(u);
-      host.appendChild(prices);
+      put(prices);
 
       if (!slim) {
         var note = document.createElement('p');
         note.className = 'offer__note';
         note.textContent = 'Tiết kiệm ' + PROMO.saveLabel +
           (PROMO.afterNote ? '. ' + PROMO.afterNote + '.' : '.');
-        host.appendChild(note);
+        put(note);
       }
 
       if (PROMO.countdown) {
@@ -247,7 +284,7 @@
         // Bản slim: đếm ngược nằm ngay cạnh giá thành một viên pill, không
         // xuống dòng riêng -> tiết kiệm chiều cao mà lại đập vào mắt hơn.
         if (slim) { dl.classList.add('offer__deadline--pill'); prices.appendChild(dl); }
-        else host.appendChild(dl);
+        else put(dl);
       }
 
       // Hàng quyền lợi: nói ngay "488.000đ này gồm những gì" đúng lúc khách
@@ -266,8 +303,11 @@
           li.appendChild(document.createTextNode(t));
           ul.appendChild(li);
         });
-        host.appendChild(ul);
+        put(ul);
       }
+
+      if (keep) host.insertBefore(frag, keep);
+      else host.appendChild(frag);
     });
   }
 
