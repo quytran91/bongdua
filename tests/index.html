@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test — Bông Dua Fleur</title>
+<style>
+  :root { color-scheme: dark; }
+  body { margin: 0; padding: 28px 20px 60px; background: #031223; color: #E8F3FF;
+         font: 15px/1.6 ui-monospace, Consolas, monospace; }
+  h1 { font-size: 20px; margin: 0 0 4px; }
+  .sum { margin: 0 0 24px; font-size: 14px; }
+  .sum b { font-size: 17px; }
+  .pass { color: #43E39B; } .fail { color: #FF8FA0; }
+  h2 { font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+       color: #22D3EE; margin: 26px 0 8px; font-weight: 500; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { padding: 3px 0 3px 24px; position: relative; }
+  li::before { position: absolute; left: 0; }
+  li.ok::before { content: '✓'; color: #43E39B; }
+  li.no::before { content: '✕'; color: #FF8FA0; }
+  .msg { display: block; color: #FF8FA0; padding-left: 2px; font-size: 13px; }
+  #banner { padding: 12px 16px; border-radius: 10px; margin-bottom: 20px; font-size: 15px; }
+  #banner.ok { background: rgba(67,227,155,.12); border: 1px solid rgba(67,227,155,.4); }
+  #banner.no { background: rgba(255,143,160,.12); border: 1px solid rgba(255,143,160,.4); }
+</style>
+</head>
+<body>
+<h1>Bông Dua Fleur — test validate &amp; luồng đăng ký</h1>
+<p class="sum" id="sum">Đang chạy…</p>
+<div id="banner"></div>
+<div id="out"></div>
+
+<script src="../assets/js/validate.js"></script>
+<script src="spec.js"></script>
+<script>
+(function () {
+  var results = window.BongDuaSpec.run(window.BongDuaValidate);
+  var pass = results.filter(function (r) { return r.ok; }).length;
+  var fail = results.length - pass;
+
+  document.getElementById('sum').innerHTML =
+    '<b class="pass">' + pass + ' pass</b> · ' +
+    '<b class="' + (fail ? 'fail' : 'pass') + '">' + fail + ' fail</b> · ' +
+    results.length + ' test';
+
+  var banner = document.getElementById('banner');
+  banner.className = fail ? 'no' : 'ok';
+  banner.textContent = fail
+    ? 'CÓ TEST HỎNG — xem chi tiết bên dưới.'
+    : 'TẤT CẢ TEST ĐỀU PASS.';
+
+  var out = document.getElementById('out');
+  var groups = [];
+  results.forEach(function (r) { if (groups.indexOf(r.group) < 0) groups.push(r.group); });
+
+  groups.forEach(function (g) {
+    var h = document.createElement('h2');
+    h.textContent = g;
+    out.appendChild(h);
+    var ul = document.createElement('ul');
+    results.filter(function (r) { return r.group === g; }).forEach(function (r) {
+      var li = document.createElement('li');
+      li.className = r.ok ? 'ok' : 'no';
+      li.textContent = r.name;
+      if (!r.ok) {
+        var s = document.createElement('span');
+        s.className = 'msg';
+        s.textContent = '↳ ' + r.message;
+        li.appendChild(s);
+      }
+      ul.appendChild(li);
+    });
+    out.appendChild(ul);
+  });
+
+  // Cho công cụ tự động đọc kết quả
+  window.__testSummary = { total: results.length, pass: pass, fail: fail,
+    failures: results.filter(function (r) { return !r.ok; }) };
+  document.title = (fail ? '✕ ' : '✓ ') + pass + '/' + results.length + ' — Test Bông Dua';
+})();
+</script>
+</body>
+</html>

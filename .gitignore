@@ -1,0 +1,14 @@
+# Thông tin thật của Bông Dua — không đưa lên git
+.env
+
+# Ảnh QR đặt trong assets/img/payment-qr-*.jpg (chủ dự án chủ động công khai
+# trên trang để khách quét). Nếu KHÔNG muốn đưa lên git, bỏ dấu # dòng dưới:
+# assets/img/payment-qr-*
+
+assets/qr/*
+!assets/qr/.gitkeep
+
+# Rác hệ điều hành
+Thumbs.db
+desktop.ini
+.DS_Store

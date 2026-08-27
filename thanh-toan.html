@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chuyển khoản giữ chỗ · Workshop đèn lồng hoa tươi — Bông Dua Fleur</title>
+<meta name="description" content="Thông tin chuyển khoản 488.000đ giữ chỗ workshop đèn lồng hoa tươi Bông Dua Fleur ngày 20.09.2026.">
+<meta name="theme-color" content="#031223">
+<!-- Trang cá nhân hoá cho từng khách, không cần Google lập chỉ mục. -->
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="icon" href="assets/img/logo-400.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/logo-400.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<link rel="preload" as="image" href="assets/img/payment-qr-760.jpg" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="paybody">
+
+<a class="skip-link" href="#pay-qr">Bỏ qua, tới mã QR</a>
+
+<div class="announce" role="region" aria-label="Thông tin nhanh về workshop">
+  <p>
+    <span class="announce__dot" aria-hidden="true"></span>
+    Workshop đèn lồng hoa tươi
+    <span class="announce__sep" aria-hidden="true">·</span>
+    <span data-cfg="event.dateShort">20.09.2026</span>
+    <span class="announce__sep" aria-hidden="true">·</span>
+    <span data-cfg="event.priceLabel">488.000đ</span>
+  </p>
+</div>
+
+<main class="paypage">
+  <div class="wrap wrap--narrow">
+
+    <a class="paypage__back" href="index.html">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"/></svg>
+      Về trang workshop
+    </a>
+
+    <header class="paypage__head">
+      <img class="paypage__logo" src="assets/img/logo-400.png" srcset="assets/img/logo-400.png 400w, assets/img/logo-800.png 800w" sizes="76px" width="1254" height="1254" alt="Bông Dua Fleur">
+      <p class="eyebrow">Bước 2 / 2 <span aria-hidden="true">·</span> Còn một bước nữa thôi</p>
+      <h1 class="paypage__title">Chuyển khoản để Bông&nbsp;Dua giữ chỗ cho bạn</h1>
+      <p class="paypage__hello" id="pay-hello"></p>
+
+      <p class="paypage__alert" id="no-booking" hidden>
+        Trang này chưa gắn với đăng ký nào. Nếu bạn chưa điền thông tin,
+        <a href="index.html#dang-ky">quay lại điền giúp Bông Dua nhé</a>.
+      </p>
+
+      <p class="paypage__alert paypage__alert--demo" id="demo-note" hidden>
+        <strong>Chế độ thử:</strong> đăng ký vừa rồi chưa được ghi vào Google Sheets.
+      </p>
+    </header>
+
+    <!-- ═══════════════════════════════ MÃ QR ═══════════════════════════ -->
+    <section class="paycard" aria-labelledby="qr-title">
+      <h2 class="paycard__title" id="qr-title">Quét hoặc lưu mã QR</h2>
+
+      <div class="pay__qr" id="pay-qr"></div>
+
+      <div class="paypage__actions">
+        <button class="btn btn--primary btn--glow" type="button" id="save-qr" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" class="ic"><path d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+          <span class="btn__label">Lưu mã QR về máy</span>
+        </button>
+        <button class="btn btn--ghost" type="button" id="copy-content">
+          <span class="btn__label">Sao chép nội dung CK</span>
+        </button>
+      </div>
+
+      <dl class="pay__rows">
+        <div><dt>Số tiền</dt><dd class="pay__amount" data-cfg="event.priceLabel">488.000đ</dd></div>
+        <div id="row-bank"><dt>Ngân hàng</dt><dd id="pay-bank">—</dd></div>
+        <div id="row-acc"><dt>Số tài khoản</dt><dd id="pay-acc">—</dd></div>
+        <div id="row-name"><dt>Chủ tài khoản</dt><dd id="pay-name">—</dd></div>
+        <div><dt>Nội dung CK</dt><dd class="pay__content"><code id="pay-content">—</code></dd></div>
+        <div id="row-regid" hidden><dt>Mã giữ chỗ</dt><dd><code id="reg-id">—</code></dd></div>
+      </dl>
+
+      <p class="paypage__micro">Quét mã QR là app ngân hàng tự điền sẵn số tiền và nội dung. Nếu app cho sửa nội dung, bạn thêm giúp tên mình để Bông Dua đối soát nhanh hơn nhé.</p>
+    </section>
+
+    <!-- ═══════════════════════════════ LIÊN HỆ ═════════════════════════ -->
+    <section class="social" id="pay-social" aria-labelledby="social-title">
+      <h2 class="social__lead" id="social-title">Chuyển xong, bạn nhắn cho Bông Dua để được xác nhận chỗ nhé:</h2>
+      <div class="social__row" id="social-links"></div>
+    </section>
+
+    <!-- ═══════════════════════════════ GHI NHẬN ════════════════════════ -->
+    <section class="paypage__claim">
+      <button class="btn btn--ghost btn--block" type="button" id="claim-btn">
+        <span class="btn__label">Tôi đã chuyển khoản</span>
+      </button>
+      <p class="paypage__claimed" id="claim-msg" hidden></p>
+    </section>
+
+    <!-- ═══════════════════════════════ NHẮC LẠI ════════════════════════ -->
+    <section class="paypage__recap" aria-labelledby="recap-title">
+      <h2 class="paypage__recaptitle" id="recap-title">Hẹn gặp bạn ở buổi workshop</h2>
+      <dl class="paypage__recaplist">
+        <div><dt>Ngày</dt><dd data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</dd></div>
+        <div><dt>Khung giờ</dt><dd data-cfg="info.time">Nửa ngày</dd></div>
+        <div><dt>Địa điểm</dt><dd data-cfg="info.place">Café tại Hà Nội</dd></div>
+      </dl>
+      <p class="paypage__recapnote">Bông Dua sẽ gọi lại xác nhận chỗ sau khi đối soát chuyển khoản. Chỗ được giữ chắc chắn khi Bông Dua đã xác nhận với bạn.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap">
+    <img class="footer__logo" src="assets/img/logo-400.png" width="1254" height="1254" loading="lazy" alt="Bông Dua Fleur">
+    <p class="footer__tag">Hoa tươi cho những ngày muốn chậm lại.</p>
+    <ul class="footer__links" id="footer-links"></ul>
+    <p class="footer__fallback" id="footer-fallback"></p>
+    <p class="footer__addr" id="footer-addr"></p>
+    <p class="footer__privacy">Thông tin bạn để lại chỉ dùng để liên hệ về đăng ký workshop này, không chia sẻ cho bên thứ ba.<span id="privacy-link"></span></p>
+    <p class="footer__copy">© 2026 Bông Dua Fleur.</p>
+  </div>
+</footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/validate.js"></script>
+<script src="assets/js/core.js"></script>
+<script src="assets/js/payment.js"></script>
+</body>
+</html>

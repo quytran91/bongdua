@@ -1,0 +1,10 @@
+# Chuẩn hoá xuống dòng: trong repo luôn là LF, khi checkout trên Windows thì
+# Git tự đổi cho hợp. Nhờ vậy file không bị báo "thay đổi toàn bộ" chỉ vì CRLF.
+* text=auto eol=lf
+
+# File nhị phân: Git không được đụng vào nội dung.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
