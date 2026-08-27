@@ -48,7 +48,7 @@ window.BONGDUA_CONFIG = {
     // Dresscode [TỪ POSTER]. Để mảng rỗng nếu không muốn hiển thị.
     dresscode: ['Trắng', 'Hồng', 'Hồng nude', 'Be'], // [TỪ POSTER]
 
-    founderName: '',                                // [CẦN ĐIỀN] tên chủ shop
+    founderName: 'Thư Phạm',                        // [XÁC NHẬN] người hướng dẫn cắm hoa
     founderRole: 'Người sáng lập Bông Dua Fleur',   // [XÁC NHẬN]
   },
 

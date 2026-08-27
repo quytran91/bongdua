@@ -320,6 +320,22 @@ button { font: inherit; color: inherit; }
   background: linear-gradient(100deg, var(--aqua) 0%, #7FC5FF 60%, var(--royal) 100%);
   -webkit-background-clip: text; background-clip: text;
   color: transparent;
+  /* Quầng sáng nhẹ quanh chữ.
+     Phải dùng filter: drop-shadow chứ KHÔNG dùng text-shadow: chữ này được tô
+     bằng background-clip: text, mà nền thì vẽ TRƯỚC text-shadow -> bóng sẽ đè
+     lên chính phần gradient và làm chữ bị đục. drop-shadow tác động lên kết quả
+     đã vẽ xong nên cho quầng sáng thật ở phía ngoài, không đụng vào màu chữ. */
+  filter:
+    drop-shadow(0 0 14px rgba(34, 211, 238, .40))
+    drop-shadow(0 0 34px rgba(65, 105, 225, .30));
+}
+/* Lưới an toàn: trình duyệt nào không hỗ trợ background-clip: text thì
+   color: transparent sẽ làm chữ BIẾN MẤT hẳn. Trả về màu đặc cho chắc. */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .hero__title em {
+    background: none;
+    color: #7FC5FF;
+  }
 }
 
 .hero__sub {
