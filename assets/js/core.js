@@ -57,6 +57,13 @@
     'event.dateLabel':  E.dateLabel || E.dateShort || '',
     'event.priceLabel': E.priceLabel || (V ? V.formatVND(E.priceVND) : ''),
 
+    // Giá gốc gạch ngang + số tiền tiết kiệm. Để priceOriginalVND = 0 là ẩn hết.
+    'event.priceOriginal': (E.priceOriginalVND && V)
+      ? V.formatVND(E.priceOriginalVND) : '',
+    'event.priceSave': (E.priceOriginalVND && E.priceVND && V)
+      ? V.formatVND(E.priceOriginalVND - E.priceVND) : '',
+    'event.promoNote': E.promoNote || '',
+
     'hero.time':  E.timeLabel || E.durationLabel || '',
     'hero.place': placeShort(),
 
@@ -98,6 +105,11 @@
       }
       el.textContent = val;
     });
+
+    // Khối giá gốc: chỉ hiện khi có priceOriginalVND
+    if (!DERIVED['event.priceOriginal']) {
+      $$('[data-cfg-row="promo"]').forEach(function (el) { el.remove(); });
+    }
 
     // Các hàng chỉ hiện khi có dữ liệu
     var dressRow = $('[data-cfg-row="dresscode"]');

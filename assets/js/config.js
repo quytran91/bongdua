@@ -36,8 +36,15 @@ window.BONGDUA_CONFIG = {
     cafeNote: 'Không gian biệt thự vintage ấm cúng, yên tĩnh giữa lòng Hà Nội.', // [TỪ POSTER]
     cafeMapUrl: '',                                 // [CẦN ĐIỀN] link Google Maps
 
-    priceVND: 488000,                               // [XÁC NHẬN]
+    priceVND: 488000,                               // [XÁC NHẬN] số tiền thực thu
     priceLabel: '488.000đ',                         // [XÁC NHẬN]
+
+    // Giá gốc để gạch ngang. Để 0 thì trang KHÔNG hiện giá gạch ở đâu cả.
+    priceOriginalVND: 1500000,                      // [XÁC NHẬN]
+
+    // Câu nhãn ưu đãi. Sửa MỘT chỗ này là đổi trên toàn trang.
+    // Ví dụ khác: 'Ưu đãi mở bán sớm' · 'Ưu đãi đến hết 10.09' · '' (ẩn hẳn).
+    promoNote: 'Ưu đãi hôm nay',                    // [XÁC NHẬN]
 
     isLastOfYear: true,                             // [XÁC NHẬN] workshop cuối 2026
 
@@ -57,11 +64,10 @@ window.BONGDUA_CONFIG = {
   // Mục confirmed:false sẽ hiển thị nhạt kèm ghi chú "đang xác nhận" — hoặc bạn
   // xoá hẳn khỏi mảng nếu không muốn nhắc tới.
   includes: [
+    { key: 'lantern',   label: 'Đèn lồng hoa tươi mang về', desc: 'Sản phẩm do chính tay bạn hoàn thiện, mang về treo ở nhà.', confirmed: true },
+    { key: 'photos',    label: 'Ảnh chuyên nghiệp', desc: 'Photographer chụp bạn cùng sản phẩm và ở cổng hoa.', confirmed: true },
+    { key: 'drink',     label: 'Đồ uống miễn phí', desc: 'Đồ uống tại café đã nằm trong vé, bạn không trả thêm.', confirmed: true },
     { key: 'technique', label: 'Kỹ thuật cắm hoa căn bản', desc: 'Được hướng dẫn từng bước, không cần biết gì trước.', confirmed: true },
-    { key: 'lantern',   label: 'Một chiếc đèn lồng hoa tươi', desc: 'Do chính tay bạn hoàn thiện và mang về.', confirmed: true },
-    { key: 'photos',    label: 'Bộ ảnh chụp trong workshop', desc: 'Photographer của Bông Dua đồng hành suốt buổi.', confirmed: true },
-    { key: 'space',     label: 'Một buổi ở giữa hoa và bạn mới', desc: 'Nhóm nhỏ, nhịp chậm, không ai bị bỏ lại phía sau.', confirmed: true },
-    { key: 'drink',     label: 'Đồ uống tại café', desc: '', confirmed: false }, // [CẦN ĐIỀN] chủ dự án xác nhận
   ],
 
   /* ------------------------------------------------------------ THANH TOÁN */

@@ -23,7 +23,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600&family=Cormorant+Garamond:wght@400;500;600&family=Italianno&display=swap" rel="stylesheet">
 
 <link rel="preload" as="image" href="assets/img/hero-banner-720.webp" imagesrcset="assets/img/hero-banner-720.webp 720w, assets/img/hero-banner-1440.webp 1440w" imagesizes="100vw" fetchpriority="high">
 <link rel="stylesheet" href="assets/css/styles.css">
@@ -36,11 +36,12 @@
 <div class="announce" role="region" aria-label="Thông tin nhanh về workshop">
   <p>
     <span class="announce__dot" aria-hidden="true"></span>
-    Workshop cuối cùng của 2026
+    <span data-cfg="event.promoNote">Ưu đãi hôm nay</span>
     <span class="announce__sep" aria-hidden="true">·</span>
     <span data-cfg="event.dateShort">20.09.2026</span>
     <span class="announce__sep" aria-hidden="true">·</span>
-    <span data-cfg="event.priceLabel">488.000đ</span>
+    <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
+    <strong data-cfg="event.priceLabel">488.000đ</strong>
   </p>
 </div>
 
@@ -73,7 +74,7 @@
       <div><dt>Ngày</dt><dd data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</dd></div>
       <div><dt>Thời gian</dt><dd data-cfg="hero.time">Nửa ngày</dd></div>
       <div><dt>Địa điểm</dt><dd data-cfg="hero.place">Café tại Hà Nội</dd></div>
-      <div><dt>Giữ chỗ</dt><dd class="is-price" data-cfg="event.priceLabel">488.000đ</dd></div>
+      <div><dt>Giữ chỗ</dt><dd class="is-price"><s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s> <span data-cfg="event.priceLabel">488.000đ</span></dd></div>
     </dl>
 
     <div class="hero__cta">
@@ -81,7 +82,11 @@
       <a class="btn btn--ghost" href="#trai-nghiem"><span class="wide-only">Xem </span>Trải nghiệm</a>
     </div>
 
-    <p class="hero__reassure">Không cần kinh nghiệm <span aria-hidden="true">·</span> Có hướng dẫn từng bước <span aria-hidden="true">·</span> Có photographer đồng hành</p>
+    <p class="hero__promo" data-cfg-row="promo">
+      <span class="hero__promo-tag" data-cfg="event.promoNote">Ưu đãi hôm nay</span>
+      <span>Tiết kiệm <strong data-cfg="event.priceSave">1.012.000đ</strong><span class="wide-only"> so với giá gốc <span data-cfg="event.priceOriginal">1.500.000đ</span></span></span>
+    </p>
+    <p class="hero__reassure">Đồ uống miễn phí <span aria-hidden="true">·</span> Sản phẩm mang về <span aria-hidden="true">·</span> Ảnh chuyên nghiệp</p>
   </div>
 
   <!-- Chip thành quả: để khách hiểu ngay buổi này làm ra cái gì. Chỉ hiện từ
@@ -220,7 +225,12 @@
     <h2 class="section-title" id="value-title">Bạn không chỉ mang về một chiếc đèn hoa.</h2>
     <ul class="value__list" id="value-list"><!-- render từ config.includes --></ul>
     <p class="value__price">
-      Trọn buổi <strong data-cfg="event.priceLabel">488.000đ</strong> <span aria-hidden="true">·</span> một lượt đăng ký là một chỗ ngồi.
+      Trọn buổi <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
+      <strong data-cfg="event.priceLabel">488.000đ</strong>
+      <span aria-hidden="true">·</span> một lượt đăng ký là một chỗ ngồi.
+    </p>
+    <p class="value__promo" data-cfg-row="promo">
+      <span data-cfg="event.promoNote">Ưu đãi hôm nay</span> — tiết kiệm <strong data-cfg="event.priceSave">1.012.000đ</strong>.
     </p>
   </div>
 </section>
@@ -326,7 +336,7 @@
       <div class="info__row"><dt>Ngày</dt><dd data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</dd></div>
       <div class="info__row"><dt>Khung giờ</dt><dd data-cfg="info.time">Nửa ngày</dd></div>
       <div class="info__row"><dt>Địa điểm</dt><dd data-cfg="info.place">Café tại Hà Nội</dd></div>
-      <div class="info__row"><dt>Chi phí</dt><dd><strong data-cfg="event.priceLabel">488.000đ</strong> / người — một lượt đăng ký là một chỗ.</dd></div>
+      <div class="info__row"><dt>Chi phí</dt><dd><s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s> <strong data-cfg="event.priceLabel">488.000đ</strong> / người — một lượt đăng ký là một chỗ. Đã gồm đồ uống, sản phẩm mang về và ảnh chuyên nghiệp.</dd></div>
       <div class="info__row"><dt>Dành cho</dt><dd>Người chưa từng cắm hoa cũng tham gia được. Đi một mình hay rủ bạn thân đều ổn.</dd></div>
       <div class="info__row"><dt>Cần mang theo</dt><dd>Không cần mang dụng cụ. Hoa, khung đèn và đồ nghề đã có sẵn. Mang theo tinh thần thong thả là đủ.</dd></div>
       <div class="info__row" data-cfg-row="dresscode"><dt>Dresscode gợi ý</dt><dd data-cfg="info.dresscode">—</dd></div>
@@ -364,7 +374,7 @@
       <details class="faq__item">
         <summary>Bộ ảnh gồm những gì và khi nào mình nhận được?</summary>
         <div class="faq__body">
-          <p>Photographer của Bông Dua chụp bạn trong lúc làm hoa và ở khu check-in hoa tươi. Đây là một phần của buổi workshop, không tính phí thêm.</p>
+          <p>Photographer chụp bạn trong lúc làm hoa, chụp cùng sản phẩm bạn vừa hoàn thiện và ở cổng hoa. Đây là ảnh chuyên nghiệp, đã nằm trong vé, không tính phí thêm.</p>
           <p data-cfg="faq.photoDelivery">Số lượng ảnh và thời gian gửi ảnh sẽ được Bông Dua báo cụ thể khi xác nhận chỗ cho bạn.</p>
         </div>
       </details>
@@ -460,6 +470,7 @@
       <span aria-hidden="true">·</span>
       <span data-cfg="closing.place">Café tại Hà Nội</span>
       <span aria-hidden="true">·</span>
+      <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
       <span data-cfg="event.priceLabel">488.000đ</span>
     </p>
     <a class="btn btn--primary btn--glow" href="#dang-ky" data-track="closing_cta_click">Giữ chỗ ngay</a>
@@ -486,8 +497,8 @@
 <!-- ══════════════════════════════════ STICKY CTA ═══════════════════════ -->
 <div class="sticky" id="sticky-cta" hidden>
   <div class="sticky__info">
-    <span class="sticky__price" data-cfg="event.priceLabel">488.000đ</span>
-    <span class="sticky__date" data-cfg="event.dateShort">20.09.2026</span>
+    <span class="sticky__price"><s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s> <span data-cfg="event.priceLabel">488.000đ</span></span>
+    <span class="sticky__date" data-cfg="event.promoNote">Ưu đãi hôm nay</span>
   </div>
   <a class="btn btn--primary btn--glow btn--sm" href="#dang-ky" data-track="sticky_cta_click">Giữ chỗ</a>
 </div>

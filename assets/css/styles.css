@@ -242,6 +242,45 @@ button { font: inherit; color: inherit; }
   .btn__spin { animation-duration: 2s; }
 }
 
+/* ------------------------------------------------------------ GIÁ / ƯU ĐÃI */
+/* Giá gốc gạch ngang: cố ý mảnh và mờ hơn để mắt rơi vào giá thật trước.
+   Dùng thẻ <s> nên trình đọc màn hình cũng hiểu đây là giá đã bỏ. */
+.price-old {
+  font-size: .74em;
+  font-weight: 400;
+  opacity: .62;
+  text-decoration-thickness: 1px;
+  margin-right: .15em;
+  white-space: nowrap;
+}
+
+.hero__promo {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+  margin: 0 0 10px;
+  font-size: 12.5px; line-height: 1.5;
+  color: var(--snow-soft);
+}
+.hero__promo strong { color: var(--snow); font-weight: 600; }
+.hero__promo-tag {
+  flex: 0 0 auto;
+  padding: 4px 11px;
+  border-radius: 999px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: .08em; text-transform: uppercase;
+  color: #04161F;
+  background: linear-gradient(135deg, #5FE3F7 0%, var(--aqua) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .55),
+    0 6px 16px -8px rgba(34, 211, 238, .85);
+}
+
+.value__promo {
+  margin: 8px 0 0;
+  font-size: 14.5px;
+  color: var(--aqua-deep);
+}
+.value__promo strong { font-weight: 600; }
+
 /* ---------------------------------------------------------- ANNOUNCEMENT */
 .announce {
   background: var(--navy);
@@ -296,7 +335,7 @@ button { font: inherit; color: inherit; }
   position: static; z-index: 1;
   width: 100%; max-width: var(--maxw);
   margin-inline: auto;
-  padding: 20px var(--gut) 34px;
+  padding: 18px var(--gut) 26px;
   display: flex; flex-direction: column; justify-content: center;
 }
 
@@ -323,7 +362,20 @@ button { font: inherit; color: inherit; }
    Chữ nay là màu đặc nên dùng thẳng text-shadow được (rẻ hơn filter), và cũng
    không còn rủi ro chữ biến mất ở trình duyệt thiếu background-clip: text. */
 .hero__title em {
-  font-style: italic;
+  /* Font thư pháp Italianno. Đã kiểm: có đủ dấu tiếng Việt (chữ "bằng" hiện
+     đúng dấu huyền + dấu á). Nét mảnh và thấp hơn Cormorant nhiều nên phải
+     phóng to gần gấp đôi và kéo line-height xuống thì mới cân với dòng trên. */
+  font-family: 'Italianno', 'Cormorant Garamond', cursive;
+  font-style: normal;
+  font-size: clamp(48px, 13.2vw, 104px);
+  /* Nét Italianno tràn ra NGOÀI hộp dòng khá nhiều (dấu huyền vươn lên, đuôi
+     chữ g kéo xuống ~1.24em trong khi hộp dòng chỉ .8em). Để line-height quá
+     thấp là dấu của "bằng" đâm vào đuôi chữ "g" ở dòng trên. Đã đo lại: với
+     line-height 1.0 + đẩy xuống .14em thì hai dòng không chạm nhau nữa. */
+  line-height: 1.0;
+  letter-spacing: .01em;
+  display: inline-block;
+  margin-top: .14em;
   color: #fff;
   text-shadow:
     /* quầng sáng: sát chữ -> loang rộng dần */
@@ -338,7 +390,7 @@ button { font: inherit; color: inherit; }
   font-size: clamp(14.5px, 3.9vw, 19px);
   color: var(--snow-soft);
   max-width: 46ch;
-  margin: 0 0 16px;
+  margin: 0 0 12px;
 }
 
 /* Mobile: 4 thông tin gộp thành một dòng ngăn bằng dấu chấm giữa -> tiết kiệm
@@ -347,8 +399,8 @@ button { font: inherit; color: inherit; }
 .hero__facts {
   display: flex; flex-wrap: wrap; align-items: baseline;
   gap: 4px 0;
-  margin: 0 0 18px;
-  padding: 12px 0 0;
+  margin: 0 0 14px;
+  padding: 10px 0 0;
   border-top: 1px solid var(--line-dark);
   max-width: 520px;
 }
@@ -832,7 +884,7 @@ button { font: inherit; color: inherit; }
 }
 .sticky.is-on { transform: translateY(0); }
 .sticky__info { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
-.sticky__price { color: var(--snow); font-size: 16px; font-weight: 600; }
+.sticky__price { color: var(--snow); font-size: 15.5px; font-weight: 600; white-space: nowrap; }
 .sticky__date { color: var(--aqua); font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; }
 .sticky .btn { flex: 0 0 auto; }
 @media (min-width: 900px) { .sticky { display: none; } }
