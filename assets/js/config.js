@@ -156,7 +156,7 @@ window.BONGDUA_CONFIG = {
     // điện thoại nhiều nên một trang thật đáng tin hơn: bấm Back được, tải lại
     // được, lưu link được, không kẹt trong khung cuộn nhỏ.
     paymentPage: 'thanh-toan.html',
-    ogImage: 'assets/img/khu-check-in-1080.jpg',
+    ogImage: 'assets/img/khu-check-in-1086.jpg',
   },
 
   /* ------------------------------------------------------------ ANALYTICS */

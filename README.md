@@ -315,9 +315,15 @@ Chạy lại khi có ảnh mới:
 python tools/build-images.py
 ```
 
-Mỗi ảnh được xuất WebP + JPEG fallback ở các bề rộng 480/768/1080 (+ bản gốc cho
-ảnh lớn) để dùng với `srcset`/`sizes`. Tổng 111 file, ~10.5 MB trên đĩa; mỗi lần
-tải trang chỉ lấy đúng một size phù hợp màn hình.
+Mỗi ảnh được xuất WebP + JPEG fallback ở **hai** bề rộng (720 cho điện thoại,
+1440 cho desktop) để dùng với `srcset`/`sizes`. Mỗi lần tải trang chỉ lấy đúng
+một size phù hợp màn hình.
+
+Chỉ giữ hai bề rộng là quyết định có chủ đích: trang này phục vụ đúng một buổi
+workshop, và GitHub chỉ cho **kéo-thả tối đa 100 file mỗi lần** khi upload thủ
+công. Nhờ vậy cả dự án gọn trong **91 file, ~8.3 MB** — kéo một lần là xong.
+Muốn nét hơn thì thêm bề rộng vào `BIG`/`MED` trong `build-images.py` rồi chạy
+lại `python tools/rewrite-srcset.py` để cập nhật HTML.
 
 Phần tử thứ 3 trong `MAP` là **tỉ lệ khung cắt sẵn** — dùng cho `hero-nhom-doc`:
 script cắt giữa ảnh gốc về khung dọc rồi mới thu nhỏ, nên bản mobile không bị

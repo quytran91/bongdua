@@ -32,19 +32,23 @@ OUT = os.path.join(ROOT, "assets", "img")
 # Phần tử thứ 3 là tỉ lệ khung mong muốn: script cắt giữa ảnh gốc về đúng tỉ lệ
 # đó TRƯỚC khi thu nhỏ. Dùng khi cần một bản dọc riêng cho điện thoại, để trình
 # duyệt không phải cắt một ảnh ngang rồi phóng to phần còn lại cho mờ.
-BIG = [480, 768, 1080, 1440]
-MED = [480, 768, 1080]
-SMALL = [400, 800]
+# Cố ý chỉ giữ HAI bề rộng mỗi ảnh (một cho điện thoại, một cho desktop).
+# Lý do rất thực tế: trang này chỉ phục vụ đúng một buổi workshop, và GitHub chỉ
+# cho kéo-thả tối đa 100 file mỗi lần upload thủ công. Ít bề rộng hơn -> toàn bộ
+# dự án gói gọn dưới 100 file, upload một lần là xong.
+BIG = [720, 1440]
+MED = [720, 1440]
+SMALL = [400]
 
 MAP = {
     # Hero art-direction: bản ngang cho desktop, bản dọc cho điện thoại.
     # Cả hai đều phải nhìn ra ngay "đây là workshop cắm hoa".
     # Banner chính thức do chủ dự án cung cấp.
-    "hero-banner": ("banner.png", [480, 768, 1080, 1440, 1774]),
+    "hero-banner": ("banner.png", [720, 1440]),
     # Mã QR chuyển khoản (đã bao sẵn số tiền + nội dung). Ảnh gốc là poster dọc
     # 1014x2046 -> cắt bỏ phần trang trí trên/dưới, chỉ giữ logo ngân hàng, mã
     # QR, số tiền và tên chủ tài khoản. Nhờ vậy QR không chiếm hết modal.
-    "payment-qr": ("mã qr.jpg", [420, 760], None, (0.0, 0.055, 1.0, 0.735)),
+    "payment-qr": ("mã qr.jpg", [760], None, (0.0, 0.055, 1.0, 0.735)),
     # Câu chuyện nàng thơ
     "story-can-phong": ("779019197_122198969954487124_8927135461220894462_n.jpg", MED),
     "story-doi-tay": ("778664674_122198970710487124_1208589309007019815_n.jpg", MED),
