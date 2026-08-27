@@ -36,8 +36,9 @@
 <div class="announce" role="region" aria-label="Thông tin nhanh về workshop">
   <p>
     <span class="announce__dot" aria-hidden="true"></span>
-    <span data-cfg="event.promoNote">Ưu đãi hôm nay</span>
-    <span class="announce__sep" aria-hidden="true">·</span>
+    <!-- Gói cả nhãn ưu đãi lẫn dấu chấm vào một thẻ, để khi hết ưu đãi thì
+         cả cụm biến mất chứ không để lại dấu "·" mồ côi ở đầu dòng. -->
+    <span data-cfg-row="promo"><span data-cfg="event.promoDeadline">Còn 15 ngày</span> <span class="announce__sep" aria-hidden="true">·</span></span>
     <span data-cfg="event.dateShort">20.09.2026</span>
     <span class="announce__sep" aria-hidden="true">·</span>
     <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
@@ -74,7 +75,6 @@
       <div><dt>Ngày</dt><dd data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</dd></div>
       <div><dt>Thời gian</dt><dd data-cfg="hero.time">Nửa ngày</dd></div>
       <div><dt>Địa điểm</dt><dd data-cfg="hero.place">Café tại Hà Nội</dd></div>
-      <div><dt>Giữ chỗ</dt><dd class="is-price"><s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s> <span data-cfg="event.priceLabel">488.000đ</span></dd></div>
     </dl>
 
     <div class="hero__cta">
@@ -82,10 +82,7 @@
       <a class="btn btn--ghost" href="#trai-nghiem"><span class="wide-only">Xem </span>Trải nghiệm</a>
     </div>
 
-    <p class="hero__promo" data-cfg-row="promo">
-      <span class="hero__promo-tag" data-cfg="event.promoNote">Ưu đãi hôm nay</span>
-      <span>Tiết kiệm <strong data-cfg="event.priceSave">1.012.000đ</strong><span class="wide-only"> so với giá gốc <span data-cfg="event.priceOriginal">1.500.000đ</span></span></span>
-    </p>
+    <div data-offer="slim"></div>
     <p class="hero__reassure">Đồ uống miễn phí <span aria-hidden="true">·</span> Sản phẩm mang về <span aria-hidden="true">·</span> Ảnh chuyên nghiệp</p>
   </div>
 
@@ -224,14 +221,11 @@
     <p class="eyebrow eyebrow--dark">Bạn nhận được gì</p>
     <h2 class="section-title" id="value-title">Bạn không chỉ mang về một chiếc đèn hoa.</h2>
     <ul class="value__list" id="value-list"><!-- render từ config.includes --></ul>
-    <p class="value__price">
-      Trọn buổi <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
-      <strong data-cfg="event.priceLabel">488.000đ</strong>
-      <span aria-hidden="true">·</span> một lượt đăng ký là một chỗ ngồi.
-    </p>
-    <p class="value__promo" data-cfg-row="promo">
-      <span data-cfg="event.promoNote">Ưu đãi hôm nay</span> — tiết kiệm <strong data-cfg="event.priceSave">1.012.000đ</strong>.
-    </p>
+    <div class="value__offer">
+      <div data-offer></div>
+      <a class="btn btn--primary btn--glow btn--block" href="#dang-ky" data-track="value_cta_click">Giữ chỗ<span class="wide-only"> với</span> <span data-cfg="event.priceLabel">488.000đ</span></a>
+      <p class="value__price">Một lượt đăng ký là một chỗ ngồi. Bấm giữ chỗ chưa trừ tiền.</p>
+    </div>
   </div>
 </section>
 
@@ -402,7 +396,9 @@
   <div class="wrap wrap--narrow">
     <p class="eyebrow">Giữ chỗ</p>
     <h2 class="section-title" id="signup-title">Để lại vài dòng, phần còn lại Bông Dua lo.</h2>
-    <p class="signup__lead">Điền form, nhận mã đăng ký và thông tin chuyển khoản ngay trên màn hình. Bông Dua sẽ gọi lại để xác nhận chỗ cho bạn.</p>
+    <p class="signup__lead">Điền form, nhận mã QR chuyển khoản ngay ở bước sau. Bông Dua sẽ gọi lại để xác nhận chỗ cho bạn.</p>
+
+    <div data-offer></div>
 
     <div class="signup__demo" id="demo-banner" hidden>
       <strong>Chế độ thử:</strong> chưa cấu hình <code>api.endpoint</code> nên đăng ký <em>chưa được ghi vào Google Sheets</em>. Xem README mục “Kết nối Google Sheets”.
@@ -469,10 +465,9 @@
       <span data-cfg="event.dateLabel">Chủ nhật, 20.09.2026</span>
       <span aria-hidden="true">·</span>
       <span data-cfg="closing.place">Café tại Hà Nội</span>
-      <span aria-hidden="true">·</span>
-      <s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s>
-      <span data-cfg="event.priceLabel">488.000đ</span>
     </p>
+
+    <div class="closing__offer" data-offer></div>
     <a class="btn btn--primary btn--glow" href="#dang-ky" data-track="closing_cta_click">Giữ chỗ ngay</a>
   </div>
 </section>
@@ -498,7 +493,7 @@
 <div class="sticky" id="sticky-cta" hidden>
   <div class="sticky__info">
     <span class="sticky__price"><s class="price-old" data-cfg-row="promo" data-cfg="event.priceOriginal">1.500.000đ</s> <span data-cfg="event.priceLabel">488.000đ</span></span>
-    <span class="sticky__date" data-cfg="event.promoNote">Ưu đãi hôm nay</span>
+    <span class="sticky__date" data-cfg="event.promoDeadline">Còn 14 ngày</span>
   </div>
   <a class="btn btn--primary btn--glow btn--sm" href="#dang-ky" data-track="sticky_cta_click">Giữ chỗ</a>
 </div>

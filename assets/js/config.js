@@ -39,12 +39,24 @@ window.BONGDUA_CONFIG = {
     priceVND: 488000,                               // [XÁC NHẬN] số tiền thực thu
     priceLabel: '488.000đ',                         // [XÁC NHẬN]
 
-    // Giá gốc để gạch ngang. Để 0 thì trang KHÔNG hiện giá gạch ở đâu cả.
+    // Giá gốc để gạch ngang. Để 0 thì trang KHÔNG hiện khối ưu đãi ở đâu cả.
     priceOriginalVND: 1500000,                      // [XÁC NHẬN]
 
-    // Câu nhãn ưu đãi. Sửa MỘT chỗ này là đổi trên toàn trang.
-    // Ví dụ khác: 'Ưu đãi mở bán sớm' · 'Ưu đãi đến hết 10.09' · '' (ẩn hẳn).
-    promoNote: 'Ưu đãi hôm nay',                    // [XÁC NHẬN]
+    // ------------------------------------------------------------------
+    //  ƯU ĐÃI CÓ HẠN
+    // ------------------------------------------------------------------
+    //  Hạn chót đặt chỗ giá ưu đãi. HẾT ngày này là ưu đãi còn hiệu lực;
+    //  từ ngày hôm sau trang TỰ ẨN toàn bộ khối ưu đãi (badge, giá gạch,
+    //  đếm ngược) — không cần ai vào sửa, và không bao giờ nói dối khách.
+    //
+    //  Số ngày còn lại được tính từ ngày thật của máy khách, nên câu
+    //  "Còn N ngày" luôn đúng chứ không phải chữ cứng.
+    //
+    //  ⚠ SAU NGÀY NÀY bạn phải tự làm 2 việc:
+    //     1. Đổi priceVND / priceLabel về giá mới
+    //     2. Đổi ảnh mã QR (mã hiện tại đã khoá cứng số tiền 488.000đ)
+    promoDeadlineISO: '2026-09-10',                 // [XÁC NHẬN]
+    promoNote: 'Ưu đãi book trước 10.09',           // [XÁC NHẬN]
 
     isLastOfYear: true,                             // [XÁC NHẬN] workshop cuối 2026
 

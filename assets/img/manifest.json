@@ -7,7 +7,7 @@
     "w": 1774,
     "h": 887,
     "ratio": 2.0,
-    "source": "banner.png"
+    "source": "banner moi.png"
   },
   "payment-qr": {
     "widths": [
@@ -17,36 +17,6 @@
     "h": 1391,
     "ratio": 0.729,
     "source": "mã qr.jpg"
-  },
-  "story-can-phong": {
-    "widths": [
-      720,
-      1320
-    ],
-    "w": 1320,
-    "h": 1980,
-    "ratio": 0.6667,
-    "source": "779019197_122198969954487124_8927135461220894462_n.jpg"
-  },
-  "story-doi-tay": {
-    "widths": [
-      720,
-      1440
-    ],
-    "w": 1614,
-    "h": 1074,
-    "ratio": 1.5028,
-    "source": "778664674_122198970710487124_1208589309007019815_n.jpg"
-  },
-  "story-nang-tho": {
-    "widths": [
-      720,
-      1366
-    ],
-    "w": 1366,
-    "h": 2048,
-    "ratio": 0.667,
-    "source": "780917547_122198973146487124_5764642390443333872_n.jpg"
   },
   "act-cham-vao-hoa": {
     "widths": [

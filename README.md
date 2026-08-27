@@ -124,6 +124,7 @@ python tools/apply-env.py           # ghi vào config.js
 | Việc | Ở đâu | Chưa điền thì sao |
 |---|---|---|
 | ~~URL Apps Script~~ | `api.endpoint` | **Đã điền và đã chạy thử thật.** Nếu xoá đi, form về **chế độ thử** kèm banner cảnh báo |
+| Hạn ưu đãi | `event.promoDeadlineISO` | **Hết ngày này trang TỰ ẨN toàn bộ khối ưu đãi.** Sau đó bạn phải tự đổi `priceVND` **và ảnh mã QR** (QR hiện tại khoá cứng 488.000đ) |
 | Ngân hàng + số TK + QR | `payment.*` | **Đã điền** từ ảnh QR bạn gửi (VPBank · 0356622262 · PHAM THI THANH THU). Nếu xoá hết, trang **không tạo QR giả** mà hiện thông báo trung tính |
 | Hotline / Zalo / email / MXH | `contact.*` | **Đã điền**: Zalo `0356622262`, Facebook `BongDuaFleur`. Để trống mục nào thì mục đó tự ẩn |
 | Tên chủ shop | `event.founderName` | Section founder chỉ ghi "Người sáng lập Bông Dua Fleur" |
@@ -431,7 +432,37 @@ Xếp theo mức chặn:
 
 ---
 
-## 11. Ghi chú kỹ thuật
+## 11. Khối ưu đãi hoạt động thế nào
+
+Giá gốc **1.500.000đ** → ưu đãi **488.000đ** (−67%), hạn đặt chỗ **10.09.2026**.
+
+Thẻ ưu đãi xuất hiện ở **4 điểm quyết định**: banner (bản gọn), cuối phần "Bạn
+nhận được gì" kèm nút giữ chỗ, ngay trên form đăng ký, và ở closing. Cả 4 do
+`renderOffers()` trong `core.js` dựng từ **một nguồn config duy nhất**, nên không
+bao giờ lệch nhau.
+
+Vài quyết định thiết kế đằng sau, để sau này ai sửa cũng hiểu vì sao:
+
+- **Số ngày còn lại tính động** từ ngày thật của máy khách, không phải chữ cứng.
+  Một dòng "Ưu đãi hôm nay" viết cứng thì hôm nay đúng, tuần sau vẫn ghi y hệt —
+  khách quay lại lần hai sẽ nhận ra và bắt đầu nghi ngờ luôn cả giá gốc.
+- **Hết hạn là tự biến mất.** Qua `promoDeadlineISO` thì badge, giá gạch, đếm
+  ngược và cả 4 thẻ đều bị gỡ khỏi DOM. Không cần ai vào sửa gấp.
+- **Giảm giá nói bằng %** trước, số tiền tiết kiệm nói sau — "−67%" đọc nhanh hơn
+  "tiết kiệm 1.012.000đ" rất nhiều.
+- **Hạn chót phải có hậu quả.** "Còn 15 ngày" chỉ có sức nặng khi đi kèm câu
+  "Sau 10.09 giá về 1.500.000đ".
+- **Thẻ tối đặt trên nền sáng** ở phần "Bạn nhận được gì" — đó là tương phản
+  mạnh nhất trang, hút mắt mà không cần màu chói.
+- Giá gốc **không làm quá mờ**: nó phải đọc được thì con số 488.000đ mới có nghĩa.
+
+> ⚠️ **Sau 10.09.2026**: đổi `priceVND` / `priceLabel` sang giá mới **và thay ảnh
+> mã QR** — mã hiện tại đã khoá cứng số tiền 488.000đ. Trang tự ẩn ưu đãi nhưng
+> không tự đổi được giá và QR.
+
+---
+
+## 12. Ghi chú kỹ thuật
 
 ### Ô tích đồng ý đã được bỏ
 

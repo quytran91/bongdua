@@ -52,17 +52,68 @@
     return [E.cafeName, E.cafeAddress].filter(Boolean).join(' — ');
   }
 
+  /* ================================================== ƯU ĐÃI CÓ HẠN ==== */
+  /**
+   * Tính trạng thái ưu đãi từ ngày thật của máy khách.
+   *
+   * Vì sao tính động chứ không viết chữ cứng: một dòng "Ưu đãi hôm nay" viết
+   * cứng thì hôm nay đúng, nhưng tuần sau vẫn ghi y hệt — khách quay lại lần
+   * hai sẽ nhận ra và bắt đầu nghi ngờ luôn cả giá gốc. Ở đây số ngày còn lại
+   * là thật, và hết hạn thì toàn bộ khối ưu đãi TỰ BIẾN MẤT.
+   */
+  var PROMO = (function () {
+    var off = { active: false };
+    var oldV = Number(E.priceOriginalVND) || 0;
+    var newV = Number(E.priceVND) || 0;
+    if (!V || !oldV || !newV || oldV <= newV) return off;
+
+    var daysLeft = null;
+    if (E.promoDeadlineISO) {
+      var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(E.promoDeadlineISO);
+      if (m) {
+        // Hạn tính đến HẾT ngày đó, theo giờ máy khách.
+        var end = new Date(+m[1], +m[2] - 1, +m[3], 23, 59, 59);
+        var now = new Date();
+        if (now > end) return off;                       // hết hạn -> ẩn sạch
+        daysLeft = Math.ceil((end - now) / 86400000);
+      }
+    }
+
+    var pct = Math.floor((oldV - newV) / oldV * 100);
+    var deadlineShort = '';
+    if (E.promoDeadlineISO) {
+      var d = E.promoDeadlineISO.split('-');
+      deadlineShort = d[2] + '.' + d[1];
+    }
+
+    var countdown = '';
+    if (daysLeft === 1) countdown = 'Chỉ còn hôm nay';
+    else if (daysLeft !== null) countdown = 'Còn ' + daysLeft + ' ngày';
+
+    return {
+      active: true,
+      oldLabel: V.formatVND(oldV),
+      newLabel: E.priceLabel || V.formatVND(newV),
+      saveLabel: V.formatVND(oldV - newV),
+      percentLabel: '−' + pct + '%',
+      note: E.promoNote || '',
+      daysLeft: daysLeft,
+      countdown: countdown,
+      afterNote: deadlineShort
+        ? 'Sau ' + deadlineShort + ' giá về ' + V.formatVND(oldV)
+        : '',
+    };
+  })();
+
   var DERIVED = {
     'event.dateShort':  E.dateShort || '',
     'event.dateLabel':  E.dateLabel || E.dateShort || '',
     'event.priceLabel': E.priceLabel || (V ? V.formatVND(E.priceVND) : ''),
 
-    // Giá gốc gạch ngang + số tiền tiết kiệm. Để priceOriginalVND = 0 là ẩn hết.
-    'event.priceOriginal': (E.priceOriginalVND && V)
-      ? V.formatVND(E.priceOriginalVND) : '',
-    'event.priceSave': (E.priceOriginalVND && E.priceVND && V)
-      ? V.formatVND(E.priceOriginalVND - E.priceVND) : '',
-    'event.promoNote': E.promoNote || '',
+    'event.priceOriginal': PROMO.active ? PROMO.oldLabel : '',
+    'event.priceSave': PROMO.active ? PROMO.saveLabel : '',
+    'event.promoNote': PROMO.active ? PROMO.note : '',
+    'event.promoDeadline': PROMO.active ? PROMO.countdown : '',
 
     'hero.time':  E.timeLabel || E.durationLabel || '',
     'hero.place': placeShort(),
@@ -99,16 +150,23 @@
       if (!DERIVED.hasOwnProperty(key)) return;
       var val = DERIVED[key];
       if (val === '' || val === null || val === undefined) {
-        // không có dữ liệu -> ẩn hẳn, không hiện placeholder rỗng
-        if (el.tagName === 'P') el.hidden = true;
+        // Không có dữ liệu -> XOÁ chữ rồi ẩn, bất kể thẻ gì.
+        // Trước đây chỉ ẩn thẻ <p>, nên khi ưu đãi hết hạn thì mấy thẻ <span>
+        // vẫn giữ nguyên chữ mẫu viết sẵn trong HTML ("Còn 14 ngày") — tức là
+        // trang nói dối khách đúng vào lúc không ai để ý nữa.
+        el.textContent = '';
+        el.hidden = true;
         return;
       }
+      el.hidden = false;
       el.textContent = val;
     });
 
-    // Khối giá gốc: chỉ hiện khi có priceOriginalVND
-    if (!DERIVED['event.priceOriginal']) {
-      $$('[data-cfg-row="promo"]').forEach(function (el) { el.remove(); });
+    // Hết ưu đãi (hoặc không cấu hình) -> gỡ sạch mọi dấu vết ưu đãi
+    if (!PROMO.active) {
+      $$('[data-cfg-row="promo"], [data-offer]').forEach(function (el) { el.remove(); });
+    } else {
+      renderOffers();
     }
 
     // Các hàng chỉ hiện khi có dữ liệu
@@ -122,6 +180,72 @@
       var c = $('link[rel="canonical"]');
       if (c) c.setAttribute('href', CFG.site.canonical);
     }
+  }
+
+  /* ==================================================== THẺ ƯU ĐÃI ====== */
+  /**
+   * Dựng thẻ ưu đãi vào mọi phần tử [data-offer]. Một nguồn duy nhất nên 4 chỗ
+   * trên trang không bao giờ lệch nhau.
+   * Thêm data-offer="slim" để lấy bản gọn (dùng ở banner, nơi phải tiết kiệm
+   * chiều cao để nút Giữ chỗ còn nằm trong màn hình đầu).
+   */
+  function renderOffers() {
+    $$('[data-offer]').forEach(function (host) {
+      var slim = host.getAttribute('data-offer') === 'slim';
+      host.classList.add('offer');
+      if (slim) host.classList.add('offer--slim');
+      host.innerHTML = '';
+
+      var top = document.createElement('div');
+      top.className = 'offer__top';
+
+      var pct = document.createElement('span');
+      pct.className = 'offer__pct';
+      pct.textContent = PROMO.percentLabel;
+      top.appendChild(pct);
+
+      if (PROMO.note) {
+        var lb = document.createElement('span');
+        lb.className = 'offer__label';
+        lb.textContent = PROMO.note;
+        top.appendChild(lb);
+      }
+      host.appendChild(top);
+
+      var prices = document.createElement('p');
+      prices.className = 'offer__prices';
+      var o = document.createElement('s');
+      o.className = 'offer__old';
+      o.textContent = PROMO.oldLabel;
+      var n = document.createElement('strong');
+      n.className = 'offer__new';
+      n.textContent = PROMO.newLabel;
+      var u = document.createElement('span');
+      u.className = 'offer__unit';
+      u.textContent = '/ người';
+      prices.appendChild(o); prices.appendChild(n); prices.appendChild(u);
+      host.appendChild(prices);
+
+      if (!slim) {
+        var note = document.createElement('p');
+        note.className = 'offer__note';
+        note.textContent = 'Tiết kiệm ' + PROMO.saveLabel +
+          (PROMO.afterNote ? '. ' + PROMO.afterNote + '.' : '.');
+        host.appendChild(note);
+      }
+
+      if (PROMO.countdown) {
+        var dl = document.createElement('p');
+        dl.className = 'offer__deadline';
+        var dot = document.createElement('span');
+        dot.className = 'offer__dot';
+        dot.setAttribute('aria-hidden', 'true');
+        dl.appendChild(dot);
+        dl.appendChild(document.createTextNode(
+          PROMO.countdown + (slim ? '' : ' để giữ mức giá này')));
+        host.appendChild(dl);
+      }
+    });
   }
 
   /* ==================================================== FOOTER ========== */
@@ -208,6 +332,8 @@
     renderFooter: renderFooter,
     placeShort: placeShort,
     placeFull: placeFull,
+    PROMO: PROMO,
+    renderOffers: renderOffers,
     saveBooking: saveBooking,
     readBooking: readBooking,
     clearBooking: clearBooking,

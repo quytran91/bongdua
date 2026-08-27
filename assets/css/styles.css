@@ -242,44 +242,175 @@ button { font: inherit; color: inherit; }
   .btn__spin { animation-duration: 2s; }
 }
 
-/* ------------------------------------------------------------ GIÁ / ƯU ĐÃI */
-/* Giá gốc gạch ngang: cố ý mảnh và mờ hơn để mắt rơi vào giá thật trước.
-   Dùng thẻ <s> nên trình đọc màn hình cũng hiểu đây là giá đã bỏ. */
-.price-old {
-  font-size: .74em;
-  font-weight: 400;
-  opacity: .62;
-  text-decoration-thickness: 1px;
-  margin-right: .15em;
-  white-space: nowrap;
+/* ------------------------------------------------------------ THẺ ƯU ĐÃI */
+/* Nguyên tắc thiết kế ở đây:
+   1. NEO GIÁ — giá gốc phải đọc được (không quá mờ) thì con số 488.000đ mới
+      có ý nghĩa. Nhưng nó nhỏ và gạch ngang để mắt dừng ở giá thật.
+   2. MỘT ĐIỂM NHÌN DUY NHẤT — chỉ số tiền được to. Mọi thứ khác nhường chỗ.
+   3. GIẢM GIÁ NÓI BẰNG % — "−67%" đập vào mắt nhanh hơn "tiết kiệm 1.012.000đ",
+      nên % đứng trước, số tiền tiết kiệm nói sau ở dòng phụ.
+   4. HẠN CHÓT PHẢI CÓ HẬU QUẢ — "còn 14 ngày" chỉ có sức nặng khi kèm câu
+      "sau 10.09 giá về 1.500.000đ".
+   5. THẺ TỐI TRÊN NỀN SÁNG — đặt thẻ tối giữa section nền pearl tạo tương phản
+      mạnh nhất trang, mắt bị hút vào mà không cần màu chói.
+   Toàn bộ số liệu do core.js dựng từ config, hết hạn là thẻ tự biến mất. */
+.offer {
+  position: relative;
+  border-radius: 20px;
+  padding: 18px 20px 20px;
+  color: var(--snow);
+  background:
+    radial-gradient(120% 100% at 0% 0%, rgba(0, 71, 171, .55) 0%, rgba(6, 27, 49, 0) 60%),
+    linear-gradient(160deg, #0A2340 0%, #061B31 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .14),
+    0 2px 4px rgba(2, 12, 26, .3),
+    0 18px 44px -22px rgba(0, 71, 171, .7);
+}
+/* Viền gradient mảnh — cách tạo cảm giác "đắt" mà không cần màu sặc sỡ */
+.offer::before {
+  content: '';
+  position: absolute; inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(150deg, rgba(34, 211, 238, .75), rgba(65, 105, 225, .35) 45%, rgba(255, 255, 255, .08));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+          mask-composite: exclude;
+  pointer-events: none;
 }
 
-.hero__promo {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 8px 10px;
+.offer__top {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px;
+  margin-bottom: 12px;
+}
+.offer__pct {
+  flex: 0 0 auto;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 13px; font-weight: 700; letter-spacing: .01em;
+  font-variant-numeric: tabular-nums;
+  color: #04161F;
+  background: linear-gradient(135deg, #7BEBFB 0%, var(--aqua) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, .6),
+    0 6px 16px -8px rgba(34, 211, 238, .9);
+}
+.offer__label {
+  font-size: 12px; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: var(--aqua);
+}
+
+.offer__prices {
+  display: flex; align-items: baseline; flex-wrap: wrap; gap: 0 10px;
   margin: 0 0 10px;
-  font-size: 12.5px; line-height: 1.5;
+}
+.offer__old {
+  font-size: 17px; font-weight: 400;
+  color: var(--snow-soft); opacity: .75;
+  text-decoration-thickness: 1.5px;
+  font-variant-numeric: tabular-nums;
+}
+.offer__new {
+  font-size: clamp(34px, 9vw, 46px);
+  font-weight: 600; line-height: 1;
+  letter-spacing: -.02em;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 26px rgba(34, 211, 238, .35);
+}
+.offer__unit { font-size: 14px; color: var(--snow-soft); }
+
+.offer__note {
+  margin: 0 0 12px;
+  font-size: 13.5px; line-height: 1.55;
   color: var(--snow-soft);
 }
-.hero__promo strong { color: var(--snow); font-weight: 600; }
-.hero__promo-tag {
+
+.offer__deadline {
+  display: flex; align-items: center; gap: 9px;
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(160, 205, 235, .16);
+  font-size: 13px; font-weight: 500;
+  color: var(--aqua);
+}
+.offer__dot {
   flex: 0 0 auto;
-  padding: 4px 11px;
-  border-radius: 999px;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: .08em; text-transform: uppercase;
-  color: #04161F;
-  background: linear-gradient(135deg, #5FE3F7 0%, var(--aqua) 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, .55),
-    0 6px 16px -8px rgba(34, 211, 238, .85);
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--aqua);
+  box-shadow: 0 0 0 0 rgba(34, 211, 238, .6);
+  animation: offer-pulse 2.4s ease-out infinite;
+}
+@keyframes offer-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(34, 211, 238, .55); }
+  70%  { box-shadow: 0 0 0 9px rgba(34, 211, 238, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 211, 238, 0); }
 }
 
-.value__promo {
-  margin: 8px 0 0;
-  font-size: 14.5px;
-  color: var(--aqua-deep);
+/* --- Bản gọn dùng ở banner ---
+   Ở đây chiều cao là tài nguyên quý: mỗi pixel thêm vào là nút "Giữ chỗ" tiến
+   gần hơn tới mép dưới màn hình. Nên bản này gộp tất cả thành một khối phẳng,
+   bỏ đường kẻ ngang, cho hạn chót nằm cùng hàng với giá. */
+.offer--slim {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 4px 12px;
+  padding: 10px 14px 11px;
+  border-radius: 14px;
+  margin-bottom: 14px;
 }
-.value__promo strong { font-weight: 600; }
+.offer--slim .offer__top { width: 100%; margin-bottom: 2px; gap: 6px 8px; }
+.offer--slim .offer__pct { padding: 2px 9px; font-size: 11.5px; }
+.offer--slim .offer__label { font-size: 10.5px; letter-spacing: .08em; }
+.offer--slim .offer__prices { margin-bottom: 0; gap: 0 8px; }
+.offer--slim .offer__old { font-size: 13.5px; }
+.offer--slim .offer__new { font-size: clamp(25px, 6.6vw, 30px); }
+.offer--slim .offer__unit { display: none; }
+.offer--slim .offer__deadline {
+  margin: 0; padding: 0; border: 0;
+  font-size: 12px; gap: 7px;
+}
+
+/* --- Trong phần "Bạn nhận được gì": thẻ tối nổi bật trên nền pearl --- */
+.value__offer {
+  margin-top: 30px;
+  padding: 0;
+}
+.value__offer .btn { margin-top: 14px; }
+.value__price {
+  margin: 10px 0 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+/* --- Trong closing --- */
+.closing__offer {
+  max-width: 420px;
+  margin: 0 auto 24px;
+  text-align: left;
+}
+
+/* --- Ngay trên form đăng ký --- */
+.signup [data-offer] { margin: 22px 0 4px; }
+
+@media (min-width: 620px) {
+  .value__offer {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    align-items: center;
+    gap: 22px;
+  }
+  .value__offer .btn { margin-top: 0; }
+  .value__price { grid-column: 2; margin-top: 10px; text-align: left; }
+  .value__offer > div:first-child { grid-row: 1 / span 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .offer__dot { animation: none; }
+}
 
 /* ---------------------------------------------------------- ANNOUNCEMENT */
 .announce {
@@ -441,7 +572,7 @@ button { font: inherit; color: inherit; }
   }
   /* Cô gái và chiếc đèn hoa nằm hơi lệch phải -> đẩy khung sang phải để chữ
      bên trái không đè lên chủ thể. */
-  .hero__media img { object-position: 64% 50%; }
+  .hero__media img { object-position: 35% 50%; }
   /* Bóng dồn về bên trái - nơi có chữ. Bên phải để sáng cho thấy rõ vòm hoa. */
   .hero__scrim {
     background:

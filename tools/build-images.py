@@ -44,7 +44,7 @@ MAP = {
     # Hero art-direction: bản ngang cho desktop, bản dọc cho điện thoại.
     # Cả hai đều phải nhìn ra ngay "đây là workshop cắm hoa".
     # Banner chính thức do chủ dự án cung cấp.
-    "hero-banner": ("banner.png", [720, 1440]),
+    "hero-banner": ("banner moi.png", [720, 1440]),   # bản cũ: banner.png
     # Mã QR chuyển khoản (đã bao sẵn số tiền + nội dung). Ảnh gốc là poster dọc
     # 1014x2046 -> cắt bỏ phần trang trí trên/dưới, chỉ giữ logo ngân hàng, mã
     # QR, số tiền và tên chủ tài khoản. Nhờ vậy QR không chiếm hết modal.
