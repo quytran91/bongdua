@@ -88,9 +88,14 @@ bong-dua-workshop/
 ### Thứ tự các phần trên trang
 
 **Trang 1 — `index.html`:**
-`Banner` → **`Người hướng dẫn cắm hoa`** → `Câu chuyện nàng thơ` → `Trải nghiệm 3 hồi`
-→ `Thành quả đèn hoa` → `Bạn nhận được gì` → `Khu check-in` → `Gallery`
-→ `Thông tin buổi học` → `FAQ` → `Form giữ chỗ` → `Closing CTA` → `Footer`
+`Banner` → **`Người hướng dẫn cắm hoa`** → `Trải nghiệm 3 hồi` → `Thành quả đèn hoa`
+→ `Bạn nhận được gì` → `Khu check-in` → `Gallery` → `Thông tin buổi học`
+→ `FAQ` → `Form giữ chỗ` → `Closing CTA` → `Footer`
+
+> Phần **"Câu chuyện nàng thơ"** đã bị gỡ theo yêu cầu của chủ shop: nó kể
+> chuyện bằng ảnh của workshop cũ (hoa hồng pastel), không khớp với buổi Trung
+> thu đèn lồng, và làm khách phải cuộn lâu mới tới phần chính. Nếu sau này có
+> ảnh đúng chủ đề và muốn dựng lại, xem commit gỡ nó trong lịch sử git.
 
 **Trang 2 — `thanh-toan.html`** (khách được chuyển sang sau khi gửi form thành công):
 `Lời chào theo tên` → `Mã QR + nút lưu` → `Thông tin chuyển khoản` →
@@ -337,9 +342,6 @@ phóng to từ một mẩu ảnh ngang.
 | `058dd6b2-…jpg` (1024×1536) | **Không đưa lên trang.** Chỉ dùng để đọc giờ/địa điểm/dresscode | Poster có chữ in sẵn; brief là source of truth cao hơn |
 | `885cfadb-…png` (1122×1402) | Chip "Đèn lồng hoa tươi" ở banner (≥1080px) + **Product proof** cận cảnh | Ở product proof dùng `object-fit: contain` trên nền tối → **không bao giờ cắt mất cánh ngôi sao**. Có nút phóng to (lightbox) |
 | `779958422_…jpg` (1320×1980) | **Người hướng dẫn cắm hoa** — chủ shop, đặt **ngay sau banner** | Đúng vai theo brief. Không gán ai khác là founder |
-| `779019197_…jpg` | Câu chuyện — hồi 1 "trước giờ hẹn" | |
-| `778664674_…jpg` | Câu chuyện — hồi 2 "giữa buổi" | |
-| `780917547_…jpg` | Câu chuyện — hồi 3 "gần trưa" | |
 | `779160486_…jpg` | Trải nghiệm 01 "Chạm vào hoa" | |
 | `779268332_…jpg` | Trải nghiệm 02 "Tạo nên đèn trăng" | |
 | `777951600_…jpg` | Trải nghiệm 03 "Lưu lại nàng thơ" | |
@@ -350,7 +352,7 @@ phóng to từ một mẩu ảnh ngang.
 | `778568574_…jpg` | Gallery — cận cảnh hoa sen | |
 | `779050263_…jpg` | Gallery — nhóm ngồi trò chuyện | |
 | `780748678_…jpg` | Gallery — nàng cầm sen | |
-| 18 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
+| 21 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
 
 Trong `MAP`, phần tử thứ 3 là **tỉ lệ khung cắt sẵn**, phần tử thứ 4 là **khung
 cắt tương đối** `(trái, trên, phải, dưới)` — dùng cho ảnh QR. Cắt trước rồi mới

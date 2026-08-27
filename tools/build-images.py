@@ -49,10 +49,6 @@ MAP = {
     # 1014x2046 -> cắt bỏ phần trang trí trên/dưới, chỉ giữ logo ngân hàng, mã
     # QR, số tiền và tên chủ tài khoản. Nhờ vậy QR không chiếm hết modal.
     "payment-qr": ("mã qr.jpg", [760], None, (0.0, 0.055, 1.0, 0.735)),
-    # Câu chuyện nàng thơ
-    "story-can-phong": ("779019197_122198969954487124_8927135461220894462_n.jpg", MED),
-    "story-doi-tay": ("778664674_122198970710487124_1208589309007019815_n.jpg", MED),
-    "story-nang-tho": ("780917547_122198973146487124_5764642390443333872_n.jpg", MED),
     "act-cham-vao-hoa": ("779160486_122198970476487124_8282488215244586479_n.jpg", MED),
     "act-tao-den-trang": ("779268332_122198969552487124_3469800110434266284_n.jpg", MED),
     "act-luu-lai": ("777951600_122198970962487124_2157797057011359087_n.jpg", MED),

@@ -54,7 +54,7 @@
 
   /* ================================================= REVEAL / MOTION ==== */
   function setupReveal() {
-    var targets = $$('.section-title, .story__lead, .story__beat, .story__close, .act, .proof__text, .proof__fig, .value__list, .value__price, .checkin__fig, .checkin__text, .gallery__item, .founder__fig, .founder__text, .info__grid, .faq__list, .closing__title, .closing__body');
+    var targets = $$('.section-title, .act, .proof__text, .proof__fig, .value__list, .value__price, .checkin__fig, .checkin__text, .gallery__item, .founder__fig, .founder__text, .info__grid, .faq__list, .closing__title, .closing__body');
     if (!('IntersectionObserver' in window) ||
         window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
