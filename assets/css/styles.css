@@ -463,6 +463,9 @@ button { font: inherit; color: inherit; }
 
 /* ------------------------------------------------------------------ ACTS */
 .acts { background: var(--pearl-2); padding: var(--sec) 0; }
+/* Tiêu đề này ngắn, bỏ giới hạn 18ch của .section-title để nó nằm gọn một dòng
+   trên desktop. Trên điện thoại vẫn tự xuống dòng theo bề ngang màn hình. */
+.acts .section-title { max-width: none; }
 .acts__list { display: grid; gap: 44px; margin-top: 40px; }
 
 .act__fig { margin: 0 0 18px; }
