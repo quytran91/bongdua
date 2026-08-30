@@ -53,6 +53,8 @@ MAP = {
     "act-tao-den-trang": ("779268332_122198969552487124_3469800110434266284_n.jpg", MED),
     "act-luu-lai": ("777951600_122198970962487124_2157797057011359087_n.jpg", MED),
     "thanh-qua-den-hoa": ("885cfadb-37b4-4de4-9be8-dcdcb2e1d19a.png", BIG),
+    # Hai chiếc đèn hai tông màu, có người cầm -> thấy được kích thước thật.
+    "thanh-qua-doi": ("6a2f9e93-1a56-4ad6-9074-3cf17f26bcad.jpg", MED),
     "khu-check-in": ("105aff45-a166-45b4-9c5c-ca486ca7102a.png", BIG),
     "founder": ("779958422_122198969312487124_3738119797127503694_n.jpg", MED),
     "gallery-ca-nhom": ("779160485_122198969222487124_7168863135255070736_n.jpg", MED),

@@ -341,6 +341,7 @@ phóng to từ một mẩu ảnh ngang.
 | `mã qr.jpg` (1014×2046) | **Mã QR trong màn hình sau đăng ký** | Cắt bỏ phần trang trí trên/dưới (giữ lại 0.055→0.735 chiều cao) → còn 1014×1391, gọn hơn nhiều trong modal mà vẫn đủ logo VPBank, QR, `488,000 đ`, `Ws 20/9`, tên và số tài khoản |
 | `logo in tạp dề 2.png` (1254×1254) | Logo trên banner + footer + favicon | Gốc là art phát sáng trên nền đen → tách nền đen thành alpha để đặt trên nền navy. Trên điện thoại logo đặt đè lên băng ảnh để không tốn thêm chiều cao màn hình đầu |
 | `058dd6b2-…jpg` (1024×1536) | **Không đưa lên trang.** Chỉ dùng để đọc giờ/địa điểm/dresscode | Poster có chữ in sẵn; brief là source of truth cao hơn |
+| `6a2f9e93-…jpg` (1086×1448) | **Product proof** ảnh thứ hai + ảnh nhắc lại trên trang chuyển khoản | Hai chiếc đèn hai tông màu, có người cầm nên thấy được kích thước thật — thứ mà ảnh chụp trên tường xám không nói được. Đây là bằng chứng trực quan cho câu "mỗi chiếc một dáng" |
 | `885cfadb-…png` (1122×1402) | Chip "Đèn lồng hoa tươi" ở banner (≥1080px) + **Product proof** cận cảnh | Ở product proof dùng `object-fit: contain` trên nền tối → **không bao giờ cắt mất cánh ngôi sao**. Có nút phóng to (lightbox) |
 | `779958422_…jpg` (1320×1980) | **Người hướng dẫn cắm hoa** — chủ shop, đặt **ngay sau banner** | Đúng vai theo brief. Không gán ai khác là founder |
 | `779160486_…jpg` | Trải nghiệm 01 "Chạm vào hoa" | |
@@ -351,7 +352,7 @@ phóng to từ một mẩu ảnh ngang.
 | `780981722_…jpg` | Gallery — chân dung cùng lan/cẩm tú cầu | |
 | `779201235_…jpg` | Gallery — khoảnh khắc cười tự nhiên | |
 | `780748678_…jpg` | Gallery — nàng cầm sen | |
-| 23 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
+| 22 ảnh còn lại | Chưa dùng | Dự phòng. Thêm vào `MAP` trong `build-images.py` nếu muốn dùng |
 
 Trong `MAP`, phần tử thứ 3 là **tỉ lệ khung cắt sẵn**, phần tử thứ 4 là **khung
 cắt tương đối** `(trái, trên, phải, dưới)` — dùng cho ảnh QR. Cắt trước rồi mới

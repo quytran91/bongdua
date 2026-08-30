@@ -180,17 +180,23 @@
     var src = $('#proof-img');
     if (!box || !panel || !img || !src) return;
 
+    function show(el) {
+      img.src = el.currentSrc || el.src;
+      img.alt = el.alt;
+      openOverlay(box, panel);
+      track('proof_zoom');
+    }
+
+    // Nút phóng to mở ảnh đầu tiên
     $$('[data-lightbox]').forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        img.src = src.currentSrc || src.src;
-        img.alt = src.alt;
-        openOverlay(box, panel);
-        track('proof_zoom');
-      });
+      btn.addEventListener('click', function () { show(src); });
     });
-    // bấm thẳng vào ảnh cũng mở được
-    src.style.cursor = 'zoom-in';
-    src.addEventListener('click', function () { $('[data-lightbox]').click(); });
+
+    // Bấm thẳng vào BẤT KỲ ảnh thành quả nào cũng mở đúng ảnh đó, không phải
+    // luôn luôn mở ảnh đầu — phần thành quả nay có hai ảnh khác nhau.
+    $$('.proof__fig img').forEach(function (el) {
+      el.addEventListener('click', function () { show(el); });
+    });
   }
 
   /* ================================================ UTM / NGUỒN ======== */
